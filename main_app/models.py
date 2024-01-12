@@ -10,15 +10,15 @@ class Customer(models.Model):
     def __str__(self):
         return f"{self.firstname} {self.lastname}'s profile"
 
-# class Product(models.Model):
-#     name = models.CharField(max_length=50)
-#     description = models.CharField(max_length=50)
-#     price = models.FloatField()
-#     quantity = models.IntegerField()
-#     image = models.CharField(max_length=100)
+class Product(models.Model):
+    name = models.CharField(max_length=50)
+    description = models.CharField(max_length=250, default='')
+    price = models.FloatField(default=0)
+    quantity = models.IntegerField(default=0)
+    image = models.ImageField(upload_to='static/product_images/')
 
-#     def __str__(self):
-#         return self.name
+    def __str__(self):
+        return self.name
 
 
 # class Cart(models.Model):
