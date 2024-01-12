@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from .models import Product, User
 
 catalogs = [
     {'name': 'Day Moisturizer', 'description': 'SPF 15', 'price': 34.99, 'quantity': 40, 'image': 'https://picsum.photos/200/300'},
@@ -11,4 +12,9 @@ def home(request):
     return render(request, 'home.html')
 
 def catalog(request):
-    return render(request, 'products/index.html', {'catalog': catalogs})
+    products = Product.objects.all()
+    return render(request, 'products/index.html', {'catalog': products})
+
+def product_details(request, product_id):
+    product = Product.objects.get(id=product_id)
+    return render(request, 'products/details.html', {'product': product})

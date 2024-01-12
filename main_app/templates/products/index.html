@@ -8,13 +8,13 @@
     <div class="col s6">
         <div class="card"> 
             <div class="card-content">
+                <a href="/products/{{product.id}}">
                 <span class="card-title">{{product.name}}</span>
-                <a href="/products/{{product.id}}"></a>
-                <img class="card-image" src="{{product.image}}" alt="product">
+                <img class="card-image" src="{{product.image.url}}" alt="product">
                 <p>{{product.description}}</p>
                 <p>{{product.price}}</p>
                 <p>{{product.quantity}} left!</span>
-                
+                </a>
             </div>
 
         </div>
