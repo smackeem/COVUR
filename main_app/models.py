@@ -1,14 +1,13 @@
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 # Create your models here.
-class Customer(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    firstname = models.CharField(max_length=50)
-    lastname = models.CharField(max_length=50)
+class Customer(AbstractUser):
+    email = models.EmailField(unique=True)
+    REQUIRED_FIELDS = ['first_name', 'last_name']
 
     def __str__(self):
-        return f"{self.firstname} {self.lastname}'s profile"
+        return f"{self.first_name} {self.last_name}'s profile"
 
 class Product(models.Model):
     name = models.CharField(max_length=50)
