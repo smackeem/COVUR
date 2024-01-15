@@ -18,7 +18,6 @@ def home(request):
 
 def catalog(request):
     products = Product.objects.all()
-    print(request.user)
     return render(request, 'products/index.html', {'catalog': products, 'user': request.user})
 
 def product_details(request, product_id):
@@ -59,9 +58,12 @@ def signout(request):
     return redirect('login')
 
 def cart(request):
+    cart = None
+    cartitems = []
     if request.user.is_authenticated:
-        cart, created = cart.objects.get_or_create(user=request.user)
-    return render(request, 'cart.html', {'user': request.user})
+        cart, created = Cart.objects.get_or_create(customer=request.user, completed=False)
+        cartitems = cart.cartitems.all()
+    return render(request, 'cart.html', {'user': request.user, 'cart': cart, 'cartitems': cartitems})
 
 def orders_view(request):
     return render(request, 'orders.html', {'user': request.user})

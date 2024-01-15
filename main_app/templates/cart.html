@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2>Cart</h2>
+{% if cartitems %}
+<ul>
+
+    {% for cartitem in cartitems %}
+    <li>{{cartitem.product.name}} , {{cartitem.quantity}}</li>
+    {% endfor %}
+</ul>
+{% else %}
+
+<p>No Items</p>
+
+{% endif %}
+
+{% endblock %}
