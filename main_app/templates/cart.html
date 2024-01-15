@@ -3,12 +3,30 @@
 
 <h2>Cart</h2>
 {% if cartitems %}
-<ul>
-
-    {% for cartitem in cartitems %}
-    <li>{{cartitem.product.name}} , {{cartitem.quantity}}</li>
-    {% endfor %}
-</ul>
+<table>
+    <thead>
+        <th>Product</th>
+        <th>Quantity</th>
+        <th>Unit Price</th>
+        <th>Price</th>
+    </thead>
+    <tbody>
+        {% for cartitem in cartitems %}
+        <tr>
+            <td>
+                {{cartitem.product.name}}
+            </td>
+            <td>{{cartitem.quantity}}</td>
+            <td>${{cartitem.product.price}}</td>
+            <td>${{cartitem.price }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<div>
+    <span>Grand Total: ${{cart.total}}</span>
+    <button>Pay</button>
+</div>
 {% else %}
 
 <p>No Items</p>

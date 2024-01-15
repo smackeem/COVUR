@@ -32,8 +32,14 @@ class Product(models.Model):
 class Cart(models.Model):
     customer = models.ForeignKey(Customer, on_delete = models.CASCADE)
     completed = models.BooleanField(default=False)
-    # product = models.ForeignKey(CartItem, on_delete = models.CASCADE)
-    total = models.FloatField(default=0)
+
+    @property
+    def total(self):
+        items = self.cartitems.all()
+        total = sum([item.price for item in items])
+        return total
+        
+
 
 class CartItem(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='items')
@@ -49,6 +55,10 @@ class CartItem(models.Model):
         self.quantity -= 1
         self.product.increase_quantity()
         self.save()
+
+    @property
+    def price(self):
+        return self.quantity * self.product.price
 
     def __str__(self):
         return f"{self.quantity} {self.product.name}"
