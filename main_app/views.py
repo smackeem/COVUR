@@ -55,5 +55,8 @@ def signout(request):
     print(request)
     return redirect('login')
 
-def cart(request):
+def cart_view(request):
     return render(request, 'cart.html', {})
+
+def orders_view(request):
+    return render(request, 'orders.html', {})

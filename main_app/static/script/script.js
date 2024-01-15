@@ -1,1 +1,3 @@
-console.log('Hello World')
+let addItemBtn = document.querySelector('#addItem')
+
+console.log(addItemBtn)
