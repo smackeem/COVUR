@@ -18,9 +18,11 @@ class Product(models.Model):
 
     def increase_quantity(self):
         self.quantity += 1
+        self.save()
 
     def decrease_quantity(self):
         self.quantity -= 1
+        self.save()
 
     def __str__(self):
         return self.name
@@ -30,20 +32,22 @@ class Product(models.Model):
 class Cart(models.Model):
     customer = models.ForeignKey(Customer, on_delete = models.CASCADE)
     # product = models.ForeignKey(CartItem, on_delete = models.CASCADE)
-    total = models.FloatField()
+    total = models.FloatField(default=0)
 
 class CartItem(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='items')
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name='cartitems')
-    quantity = models.IntegerField()
+    quantity = models.IntegerField(default=0)
 
     def increase_quantity(self):
         self.quantity += 1
-        self.product.quantity -= 1
+        self.product.decrease_quantity()
+        self.save()
 
     def decrease_quantity(self):
         self.quantity -= 1
-        self.product.quantity += 1
+        self.product.increase_quantity()
+        self.save()
 
     def __str__(self):
         return f"{self.quantity} {self.product.name}"

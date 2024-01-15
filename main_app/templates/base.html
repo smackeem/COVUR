@@ -7,7 +7,7 @@
   <title>COVUR</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-  <script src="{% static 'script/script.js' %}"></script>
+  
 </head>
 <body>
   <header class="navbar-fixed">
@@ -17,8 +17,9 @@
           <li><a href="/" class="left brand-logo">&nbsp;&nbsp;COVUR</a></li>
         </ul>
         <ul class="right">
-          <li><a href="{% url 'catalog' %}">Products</a></li>
+          <li><a href="{% url 'cart' %}">Cart</a></li>
           {% if user.is_authenticated %}
+          <li><a href="{% url 'orders' %}">Orders</a></li>
           <li><a href="{% url 'logout' %}">Logout</a></li>
           {% else %}
           <li><a href="{% url 'signup' %}">SignUp</a></li>
@@ -33,6 +34,7 @@
   <main class="container">
     {% block content %}
     {% endblock %}
+    <script src="{% static 'script/script.js' %}"></script>
   </main>
   <footer class="page-footer">
     <div class="right">All Rights Reserved, &copy; 2023 COVUR &nbsp;</div>

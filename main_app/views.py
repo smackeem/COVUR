@@ -3,7 +3,8 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from .forms import SignUpForm
 from django.contrib import messages
-from .models import Product
+from .models import Product, Cart, CartItem
+from django.http import JsonResponse
 
 # catalogs = [
 #     {'name': 'Day Moisturizer', 'description': 'SPF 15', 'price': 34.99, 'quantity': 40, 'image': 'https://picsum.photos/200/300'},
@@ -62,3 +63,15 @@ def cart_view(request):
 
 def orders_view(request):
     return render(request, 'orders.html', {'user': request.user})
+
+def add_to_cart(request):
+    if request.POST:
+        product_id = request.POST['product']
+        product = Product.objects.get(id=product_id)
+
+        if request.user.is_authenticated:
+            cart, created = Cart.objects.get_or_create(customer=request.user)
+            cartItem, created = CartItem.objects.get_or_create(cart=cart, product=product)
+            cartItem.increase_quantity()
+            print('quantity', cartItem.quantity)
+        return redirect('catalog')
