@@ -58,7 +58,9 @@ def signout(request):
     print(request)
     return redirect('login')
 
-def cart_view(request):
+def cart(request):
+    if request.user.is_authenticated:
+        cart, created = cart.objects.get_or_create(user=request.user)
     return render(request, 'cart.html', {'user': request.user})
 
 def orders_view(request):

@@ -31,6 +31,7 @@ class Product(models.Model):
 
 class Cart(models.Model):
     customer = models.ForeignKey(Customer, on_delete = models.CASCADE)
+    completed = models.BooleanField(default=False)
     # product = models.ForeignKey(CartItem, on_delete = models.CASCADE)
     total = models.FloatField(default=0)
 
