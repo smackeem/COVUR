@@ -17,11 +17,12 @@ def home(request):
 
 def catalog(request):
     products = Product.objects.all()
-    return render(request, 'products/index.html', {'catalog': products})
+    print(request.user)
+    return render(request, 'products/index.html', {'catalog': products, 'user': request.user})
 
 def product_details(request, product_id):
     product = Product.objects.get(id=product_id)
-    return render(request, 'products/details.html', {'product': product})
+    return render(request, 'products/details.html', {'product': product, 'user': request.user})
 
 def signup(request):
     if request.method == 'POST':
@@ -43,6 +44,7 @@ def login_view(request):
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
             login(request, form.get_user())
+            print(request)
             return redirect('catalog')
         else:
             print(form.errors)
@@ -56,7 +58,7 @@ def signout(request):
     return redirect('login')
 
 def cart_view(request):
-    return render(request, 'cart.html', {})
+    return render(request, 'cart.html', {'user': request.user})
 
 def orders_view(request):
-    return render(request, 'orders.html', {})
+    return render(request, 'orders.html', {'user': request.user})

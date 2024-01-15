@@ -26,6 +26,7 @@ SECRET_KEY = 'django-insecure-^*2aog%8)m!-@*g34o_*qwgw*3sue6c%a$f)!2g)*r7-_h5xvv
 DEBUG = True
 
 ALLOWED_HOSTS = []
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
 
 # Custom User
 AUTH_USER_MODEL = 'main_app.Customer'
