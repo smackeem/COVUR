@@ -54,3 +54,6 @@ def signout(request):
     logout(request)
     print(request)
     return redirect('login')
+
+def cart(request):
+    return render(request, 'cart.html', {})

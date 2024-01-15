@@ -15,6 +15,12 @@
                 <p>{{product.price}}</p>
                 <p>{{product.quantity}} left!</span>
                 </a>
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <input hidden type="text" name="product" value="{{ product.id }}">
+                    <button type="submit">ADD TO CART</button> 
+                </form>
+                
             </div>
 
         </div>
