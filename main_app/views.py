@@ -6,6 +6,7 @@ from django.contrib import messages
 from .models import Product, Cart, CartItem
 from django.http import JsonResponse
 
+
 # catalogs = [
 #     {'name': 'Day Moisturizer', 'description': 'SPF 15', 'price': 34.99, 'quantity': 40, 'image': 'https://picsum.photos/200/300'},
 #     {'name': 'Toner', 'description': 'Blemish remover', 'price': 29.99, 'quantity': 40, 'image': 'https://picsum.photos/200/300'},
@@ -18,7 +19,8 @@ def home(request):
 
 def catalog(request):
     products = Product.objects.all()
-    return render(request, 'products/index.html', {'catalog': products, 'user': request.user})
+    cart, created = Cart.objects.get_or_create(customer=request.user, completed=False)
+    return render(request, 'products/index.html', {'cart': cart, 'catalog': products, 'user': request.user})
 
 def product_details(request, product_id):
     product = Product.objects.get(id=product_id)
@@ -74,8 +76,15 @@ def add_to_cart(request):
         product = Product.objects.get(id=product_id)
 
         if request.user.is_authenticated:
-            cart, created = Cart.objects.get_or_create(customer=request.user)
+            cart, created = Cart.objects.get_or_create(customer=request.user, completed=False)
             cartItem, created = CartItem.objects.get_or_create(cart=cart, product=product)
             cartItem.increase_quantity()
             print('quantity', cartItem.quantity)
         return redirect('catalog')
+    
+def confirm_payment(request, cart_id):
+    cart = Cart.objects.get(id= cart_id)
+    cart.completed = True
+    cart.save()
+    messages.success(request, 'Payment Successful!')
+    return redirect('catalog')

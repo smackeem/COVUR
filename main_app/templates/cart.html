@@ -16,9 +16,10 @@
             <td>
                 {{cartitem.product.name}}
             </td>
-            <td>{{cartitem.quantity}}</td>
+            <td><button>-</button> {{cartitem.quantity}} <button>+</button></td>
             <td>${{cartitem.product.price}}</td>
             <td>${{cartitem.price }}</td>
+            <td><button>x</button></td>
         </tr>
         {% endfor %}
     </tbody>

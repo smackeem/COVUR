@@ -17,7 +17,7 @@
           <li><a href="/" class="left brand-logo">&nbsp;&nbsp;COVUR</a></li>
         </ul>
         <ul class="right">
-          <li><a href="{% url 'cart' %}">Cart</a></li>
+          <li><a href="{% url 'cart' %}">Cart {{cart.num_of_items}} </a></li>
           {% if user.is_authenticated %}
           <li><a href="{% url 'orders' %}">Orders</a></li>
           <li><a href="{% url 'logout' %}">Logout</a></li>
@@ -30,6 +30,14 @@
         </ul>
       </div>
     </nav>
+    {% if messages %}     
+        {% for message in messages %}  
+        <div>
+          {{ message }}
+        </div>
+        {% endfor %}  
+    <hr>
+    {% endif %} 
   </header>
   <main class="container">
     {% block content %}

@@ -8,18 +8,19 @@
     <div class="col s6">
         <div class="card"> 
             <div class="card-content">
-                <a href="{% url 'product_detail' product.id %}">
+                
                 <span class="card-title">{{product.name}}</span>
                 <img class="card-image" src="{{product.image.url}}" alt="product">
                 <p>{{product.description}}</p>
                 <p>{{product.price}}</p>
                 <p>{{product.quantity}} left!</span>
-                </a>
+                
                 <form action="{% url 'add' %}" method="POST">
                     {% csrf_token %}
                     <input hidden type="text" name="product" value="{{ product.id }}">
                     <button id="addItem" type="submit" >ADD TO CART</button> 
                 </form>
+                <a href="{% url 'product_detail' product.id %}"> <button>VIEW</button> </a>
                 
             </div>
 

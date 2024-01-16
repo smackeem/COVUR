@@ -41,7 +41,7 @@ class Cart(models.Model):
     @property
     def num_of_items(self):
         items = self.cartitems.all()
-        return sum([items.quantity for item in items])
+        return sum([item.quantity for item in items])
 
         
 
