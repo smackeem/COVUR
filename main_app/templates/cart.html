@@ -6,7 +6,7 @@
     <div class="card-content">
             <span >Items: <strong id="num_of_items">{{cart.num_of_items}}</strong></span>
             <span>Total: <strong id="cart_total">${{cart.total}}</strong></span>
-            <span><button class="btn">Checkout</button></span>
+            <a href="{% url 'checkoutpage' %}"><span><button class="btn">Checkout</button></span></a>
         
     </div>
 </div>

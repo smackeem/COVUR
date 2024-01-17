@@ -33,6 +33,7 @@ class Cart(models.Model):
     customer = models.ForeignKey(Customer, on_delete = models.CASCADE, null=True, blank=True)
     completed = models.BooleanField(default=False)
     session_id = models.CharField(max_length=100, null=True, blank=True)
+    stripe_checkout_id = models.CharField(max_length=100, null=True, blank=True)
 
     @property
     def total(self):
