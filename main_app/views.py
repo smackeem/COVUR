@@ -6,6 +6,7 @@ from .forms import SignUpForm
 from django.contrib import messages
 from .models import Product, Cart, CartItem
 from django.http import JsonResponse
+import uuid
 
 
 # catalogs = [
@@ -37,29 +38,27 @@ def signup(request):
             form.save()
             messages.success(request, 'Account created successfully. Please log in.')
             print('made,', form)
-            return redirect('/products')
+            return redirect('/login')
         else:
             print(form.errors)
     else:
         form = SignUpForm()
-    return render(request, 'signup.html', {'form': form})
+    return render(request, 'signup.html', {'form': form, 'messages': messages})
 
 def login_view(request):
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
             login(request, form.get_user())
-            print(request)
             return redirect('catalog')
         else:
-            print(form.errors)
+            return messages.error()
     else:
         form = AuthenticationForm()
     return render(request, 'login.html', {'form': form})
 
 def signout(request):
     logout(request)
-    print(request)
     return redirect('login')
 
 def cart(request):
@@ -83,22 +82,29 @@ def add_to_cart(request):
     
         if request.user.is_authenticated:
             cart, created = Cart.objects.get_or_create(customer=request.user, completed=False)
-            cartItem, created = CartItem.objects.get_or_create(cart=cart, product=product)
+        else:
+            try:
+                cart = Cart.objects.get(session_id = request.session['nonuser'], completed=False)
             
-            match action:
-                case 'add':
-                    cartItem.increase_quantity()
-                    print('quantity', cartItem.quantity)
+            except:
+                request.session['nonuser'] = str[uuid.uuid4()]
+                cart = Cart.objects.get(session_id = request.session['nonuser'], completed=False)
+        cartItem, created = CartItem.objects.get_or_create(cart=cart, product=product)
+            
+        match action:
+            case 'add':
+                cartItem.increase_quantity()
+                print('quantity', cartItem.quantity)
 
-                case 'sub':
-                    cartItem.decrease_quantity()
-                    print('quantity', cartItem.quantity)
-                    if(cartItem.quantity <= 0):
-                        cartItem.delete()
-                
-                case 'del':
+            case 'sub':
+                cartItem.decrease_quantity()
+                print('quantity', cartItem.quantity)
+                if(cartItem.quantity <= 0):
                     cartItem.delete()
-            num_of_items = cart.num_of_items
+            case 'del':
+                cartItem.delete()
+        num_of_items = cart.num_of_items     
+
     return JsonResponse(num_of_items, safe=False)
 
 def confirm_payment(request, cart_id):
