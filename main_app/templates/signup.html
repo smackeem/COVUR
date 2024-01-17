@@ -1,14 +1,6 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>COVUR</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-</head>
-<body>
+{% extends 'base.html' %}
+{% block content %}
+
   <h2>Sign up</h2>
 {% if messages %}  
     <ul>   
@@ -24,6 +16,7 @@
     {{ form.as_p }}
     <button type="submit" >Sign up</button>
   </form>
-</body>
-</html>
+  <p>Already have an account? <a href="{% url 'login' %}">Sign In</a></p>
+
+  {% endblock %}
 

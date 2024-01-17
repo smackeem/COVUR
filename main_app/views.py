@@ -20,7 +20,9 @@ def home(request):
 
 def catalog(request):
     products = Product.objects.all()
-    cart, created = Cart.objects.get_or_create( completed=False)
+    cart = None
+    if request.user.is_authenticated:
+        cart, created = Cart.objects.get_or_create(customer=request.user, completed=False)
     return render(request, 'products/index.html', {'cart': cart, 'catalog': products, 'user': request.user})
 
 def product_details(request, product_id):
