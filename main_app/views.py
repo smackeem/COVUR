@@ -1,30 +1,24 @@
 import json
+import uuid
+import stripe
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
+from django.contrib import messages
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import AuthenticationForm
+from django.views import View
+from django.conf import settings
 from .forms import SignUpForm
-from django.contrib import messages
 from .models import Product, Cart, CartItem
-from django.http import JsonResponse
-import uuid
 
-
-# catalogs = [
-#     {'name': 'Day Moisturizer', 'description': 'SPF 15', 'price': 34.99, 'quantity': 40, 'image': 'https://picsum.photos/200/300'},
-#     {'name': 'Toner', 'description': 'Blemish remover', 'price': 29.99, 'quantity': 40, 'image': 'https://picsum.photos/200/300'},
-#     {'name': 'Eye Cream', 'description': 'Anti-Age', 'price': 15.99, 'quantity': 40, 'image': 'https://picsum.photos/200/300'},
-# ]
 
 # Create your views here.
 def home(request):
     return render(request, 'home.html')
 
 def catalog(request):
-    products = Product.objects.all()
-    cart = None
-    if request.user.is_authenticated:
-        cart, created = Cart.objects.get_or_create(customer=request.user, completed=False)
-    return render(request, 'products/index.html', {'cart': cart, 'catalog': products, 'user': request.user})
+    products = Product.objects.all()    
+    return render(request, 'products/index.html', {'catalog': products, 'user': request.user})
 
 def product_details(request, product_id):
     product = Product.objects.get(id=product_id)
@@ -33,26 +27,33 @@ def product_details(request, product_id):
 def signup(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
-        print(form)
         if form.is_valid():
             form.save()
             messages.success(request, 'Account created successfully. Please log in.')
-            print('made,', form)
             return redirect('/login')
         else:
-            print(form.errors)
+            messages.warning(request, 'Please check your information and try again!')
     else:
         form = SignUpForm()
-    return render(request, 'signup.html', {'form': form, 'messages': messages})
+    return render(request, 'signup.html', {'form': form})
 
 def login_view(request):
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
             login(request, form.get_user())
+
+            cart = Cart.objects.get(session_id = request.session['nonuser'], completed=False)
+            if Cart.objects.filter(customer=request.user, completed=False).exists():
+                cart.customer = None
+                cart.save()
+            else:
+                cart.customer = request.user 
+                cart.save()
+
             return redirect('catalog')
         else:
-            return messages.error()
+            messages.warning(request, 'Username and Password do not match. Please try again!')
     else:
         form = AuthenticationForm()
     return render(request, 'login.html', {'form': form})
@@ -62,12 +63,7 @@ def signout(request):
     return redirect('login')
 
 def cart(request):
-    cart = None
-    cartitems = []
-    if request.user.is_authenticated:
-        cart, created = Cart.objects.get_or_create(customer=request.user, completed=False)
-        cartitems = cart.cartitems.all()
-    return render(request, 'cart.html', {'user': request.user, 'cart': cart, 'cartitems': cartitems})
+    return render(request, 'cart.html', {'user': request.user})
 
 def orders_view(request):
     return render(request, 'orders.html', {'user': request.user})
@@ -87,10 +83,10 @@ def add_to_cart(request):
                 cart = Cart.objects.get(session_id = request.session['nonuser'], completed=False)
             
             except:
-                request.session['nonuser'] = str[uuid.uuid4()]
-                cart = Cart.objects.get(session_id = request.session['nonuser'], completed=False)
-        cartItem, created = CartItem.objects.get_or_create(cart=cart, product=product)
-            
+                request.session['nonuser'] = str(uuid.uuid4())
+                cart = Cart.objects.create(session_id = request.session['nonuser'], completed=False)
+        
+        cartItem, created = CartItem.objects.get_or_create(cart=cart, product=product)  
         match action:
             case 'add':
                 cartItem.increase_quantity()

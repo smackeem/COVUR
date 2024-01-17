@@ -16,12 +16,12 @@
           <li><a href="/" class="left brand-logo">&nbsp;&nbsp;COVUR</a></li>
         </ul>
         <ul class="right">
-          <li><a href="{% url 'cart' %}">Cart {% if cart.num_of_tokens %}<span id="num_of_items">{{cart.num_of_items}} </span> {% else %} 0 {% endif %}</a></li>
+          <li><a href="{% url 'cart' %}">Cart {% if cart.num_of_items %}<span id="num_of_items">{{cart.num_of_items}} </span> {% else %} 0 {% endif %}</a></li>
           {% if user.is_authenticated %}
           <li><a href="{% url 'orders' %}">Orders</a></li>
           <li><a href="{% url 'logout' %}">Logout</a></li>
           {% else %}
-          <li><a href="{% url 'signup' %}">SignUp</a></li>
+          <li><a href="{% url 'signup' %}">Sign Up</a></li>
           <li><a href="{% url 'login' %}">Login</a></li>
           {% endif %}
           
@@ -48,6 +48,9 @@
 }
 const csrftoken = getCookie('csrftoken');
     </script>
+    
+  </header>
+  <main class="container">
     {% if messages %}     
         {% for message in messages %}  
         <div>
@@ -56,8 +59,7 @@ const csrftoken = getCookie('csrftoken');
         {% endfor %}  
     <hr>
     {% endif %} 
-  </header>
-  <main class="container">
+
     {% block content %}
     
     {% endblock %}

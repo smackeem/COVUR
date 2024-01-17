@@ -65,6 +65,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'main_app.context_processor.get_cart',
             ],
         },
     },
@@ -131,5 +132,5 @@ MEDIA_ROOT = BASE_DIR/"media"
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 STRIPE_PUBLIC_KEY = "pk_test_51OYwERCVfszziAasrqHuKcAz0fXjy7MlGQ0HoAQoKdrG3ySBPgyfGFWXr0L5mWx1SMhSqslOLdoVi3epCfwViY6F00NC3Snt4x"
-STRIPE_SECRET_KEY = ""
+STRIPE_SECRET_KEY = "sk_test_51OYwERCVfszziAas4QOrypXLShGI9RiJUXDiONNmvEarEP3QP1yqJffYpTMKUhCF8snGpbR6j0Ltzt2J0TQLmuxL00elrJGkKN"
 STIPE_WEBHOOK_SECRET = ""

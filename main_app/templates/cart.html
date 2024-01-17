@@ -10,7 +10,7 @@
         
     </div>
 </div>
-{% if cartitems %}
+{% if cart.cartitems.all %}
 <div class="card">
     <div class="card-content">
         <table>
@@ -21,7 +21,7 @@
                 <th>Price</th>
             </thead>
             <tbody>
-                {% for cartitem in cartitems %}
+                {% for cartitem in cart.cartitems.all %}
                 <tr>
                     <td>
                         {{cartitem.product.name}}
