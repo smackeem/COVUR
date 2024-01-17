@@ -7,7 +7,6 @@
   <title>COVUR</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-  
 </head>
 <body>
   <header class="navbar-fixed">
@@ -17,7 +16,7 @@
           <li><a href="/" class="left brand-logo">&nbsp;&nbsp;COVUR</a></li>
         </ul>
         <ul class="right">
-          <li><a href="{% url 'cart' %}">Cart {{cart.num_of_items}} </a></li>
+          <li><a href="{% url 'cart' %}">Cart <span id="num_of_items">{{cart.num_of_items}} </span></a></li>
           {% if user.is_authenticated %}
           <li><a href="{% url 'orders' %}">Orders</a></li>
           <li><a href="{% url 'logout' %}">Logout</a></li>
@@ -30,6 +29,25 @@
         </ul>
       </div>
     </nav>
+    <script>
+      let user = '{{ request.user }}'
+      function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+const csrftoken = getCookie('csrftoken');
+    </script>
     {% if messages %}     
         {% for message in messages %}  
         <div>
@@ -41,11 +59,10 @@
   </header>
   <main class="container">
     {% block content %}
+    
     {% endblock %}
     <script src="{% static 'script/script.js' %}"></script>
   </main>
-  <footer class="page-footer">
-    <div class="right">All Rights Reserved, &copy; 2023 COVUR &nbsp;</div>
-  </footer>
+  
 </body>
 </html>

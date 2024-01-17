@@ -1,3 +1,4 @@
+import json
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import AuthenticationForm
@@ -19,7 +20,7 @@ def home(request):
 
 def catalog(request):
     products = Product.objects.all()
-    cart, created = Cart.objects.get_or_create(customer=request.user, completed=False)
+    cart, created = Cart.objects.get_or_create( completed=False)
     return render(request, 'products/index.html', {'cart': cart, 'catalog': products, 'user': request.user})
 
 def product_details(request, product_id):
@@ -71,17 +72,33 @@ def orders_view(request):
     return render(request, 'orders.html', {'user': request.user})
 
 def add_to_cart(request):
-    if request.POST:
-        product_id = request.POST['product']
+    if request.body:
+        data = json.loads(request.body)
+        product_id = data['product']
+        action = data['action']
         product = Product.objects.get(id=product_id)
-
+        print(product, action)
+    
         if request.user.is_authenticated:
             cart, created = Cart.objects.get_or_create(customer=request.user, completed=False)
             cartItem, created = CartItem.objects.get_or_create(cart=cart, product=product)
-            cartItem.increase_quantity()
-            print('quantity', cartItem.quantity)
-        return redirect('catalog')
-    
+            
+            match action:
+                case 'add':
+                    cartItem.increase_quantity()
+                    print('quantity', cartItem.quantity)
+
+                case 'sub':
+                    cartItem.decrease_quantity()
+                    print('quantity', cartItem.quantity)
+                    if(cartItem.quantity <= 0):
+                        cartItem.delete()
+                
+                case 'del':
+                    cartItem.delete()
+            num_of_items = cart.num_of_items
+    return JsonResponse(num_of_items, safe=False)
+
 def confirm_payment(request, cart_id):
     cart = Cart.objects.get(id= cart_id)
     cart.completed = True

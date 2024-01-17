@@ -1,11 +1,36 @@
-// let addItemBtn = document.querySelectorAll('#addItem')
+let updateItemBtns = document.querySelectorAll('#updateItem')
 
-// addItemBtn.forEach((btn)=>{
-//     btn.addEventListener("click", addToCart)
-// })
+let removeBtn = document.querySelectorAll('#remove')
 
-// function addToCart(e){
-//     let product_id = e.target.value
-//     return product_id
-// }
-// console.log(addItemBtn)
+updateItemBtns.forEach((btn)=>{
+    btn.addEventListener("click", updateCart)
+})
+
+function updateCart(e){
+    e.preventDefault()
+    let product_id = this.dataset.product
+    let action = this.dataset.action
+    if(user == 'AnonymousUser'){
+        console.log('Anon')
+    }else{
+        let url = '/add/'
+        fetch(url,
+        {method: 'POST',
+    headers:{
+        'Content-Type': 'application/json',
+    'X-CSRFToken': csrftoken},
+        body: JSON.stringify({'product': product_id, 'action': action})
+    }).then((response) => {
+        return response.json()
+    }).then((data)=>{
+        console.log('data', data)
+        items = document.querySelectorAll('#num_of_items')
+        items.forEach((item)=>{
+            item.innerText = data
+        })
+    }).catch((err)=>{
+        console.log(err)
+    })
+    }
+}
+

@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Catlaog</h1>
+<h1>Catalog</h1>
 <div class="row">
 {% for product in catalog %}
 
@@ -15,12 +15,14 @@
                 <p>{{product.price}}</p>
                 <p>{{product.quantity}} left!</span>
                 
-                <form action="{% url 'add' %}" method="POST">
-                    {% csrf_token %}
-                    <input hidden type="text" name="product" value="{{ product.id }}">
-                    <button id="addItem" type="submit" >ADD TO CART</button> 
-                </form>
-                <a href="{% url 'product_detail' product.id %}"> <button>VIEW</button> </a>
+                    <div>
+                      
+                        <button data-product="{{product.id}}" data-action="add" id="updateItem" type="submit" >ADD TO CART</button> 
+                       
+                        <a href="{% url 'product_detail' product.id %}"> <button>VIEW</button> </a>
+                    </div>
+                
+                
                 
             </div>
 
