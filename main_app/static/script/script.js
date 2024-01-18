@@ -1,11 +1,9 @@
 let updateItemBtns = document.querySelectorAll("#updateItem");
 
-let checkoutBtn = document.querySelector("#checkout-button");
-
 updateItemBtns.forEach((btn) => {
   btn.addEventListener("click", updateCart);
 });
- checkoutBtn.addEventListener("click", checkoutCart)
+
 
 function updateCart(e) {
   e.preventDefault();
@@ -33,9 +31,4 @@ function updateCart(e) {
     .catch((err) => {
       console.log(err);
     });
-}
-
-function checkoutCart(e){
-    e.preventDefault()
-    
 }

@@ -10,11 +10,14 @@
     </div>
     <form action="{% url 'checkout' %}" method="POST">
         {% csrf_token %}
-      <button type="submit" id="checkout-button">Checkout</button>
+        <input hidden value="{{user.username}}" type="text" name="username">
+        <input hidden value="{{cart.num_of_items}}" type="text" name="quantity">
+        <input hidden value="{{cart.total}}" type="text" name="price">
+        <button type="submit" id="checkout-button">Checkout</button>
     </form>
   </section>
 
 {% endblock %}
 <script>
-    
+
 </script>

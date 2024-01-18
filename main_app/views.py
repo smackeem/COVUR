@@ -8,7 +8,7 @@ from django.views import View
 from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
 from .forms import SignUpForm
-from .models import Product, Cart, CartItem
+from .models import Product, Cart, CartItem, Customer
 
 
 # Create your views here.
@@ -104,42 +104,44 @@ def add_to_cart(request):
 
 def confirm_payment(request):
     stripe.api_key = settings.STRIPE_SECRET_KEY
+    print(request)
     checkout_session_id = request.GET.get('session_id', None)
+    print('checkout id: ',checkout_session_id)
     session = stripe.checkout.Session.retrieve(checkout_session_id)
+    user = Customer.objects.get(username = session.metadata.user)
     customer = stripe.Customer.retrieve(session.customer)
-    print(customer)
-    user_id = request.user.user_id 
-    print(user_id)
-    cart = Cart.objects.get(customer=user_id, completed=False)
-    cart.stripe_checkout_id = checkout_session_id
+    print(customer.created)
+    cart = Cart.objects.get(customer=user, completed=False)
+    cart.stripe_checkout_id = customer.created
     cart.save()
     messages.success(request, 'Payment Successful!')
     return redirect('orders')
 
 def create_checkout_session(request):
+    user = str(request.POST['username'])
+    price = float(request.POST['price'])
+    quantity = int(request.POST['quantity'])
     try:
         stripe.api_key = settings.STRIPE_SECRET_KEY
-        print(stripe.api_key)
         print('trying')
         checkout_session = stripe.checkout.Session.create(
              line_items=[{
       'price_data': {
         'currency': 'usd',
         'product_data': {
-          'name': 'T-shirt',
+          'name': 'COVUR',
         },
         'unit_amount': 2000,
       },
-      'quantity': 1,
+      'quantity': quantity,
     }],
             mode='payment',
             customer_creation = 'always',
             success_url= settings.REDIRECT_URL + '/success?session_id={CHECKOUT_SESSION_ID}',
-            cancel_url= settings.REDIRECT_URL + '/cancel/',
+            cancel_url= settings.REDIRECT_URL + '/cart/',
+            metadata = {'user': user},
         )
-        print('maybe')
     except Exception as e:
-        print('failed')
         return str(e)
 
     return redirect(checkout_session.url, code=303)
@@ -155,37 +157,21 @@ def stripe_webhook(request):
     signature_header = request.META['HTTP_STRIPE_SIGNATURE']
     event= None
     try:
-
-        event = stripe.Webhook.construct_event(
-            payload, signature_header, settings.STRIPE_WEBHOOK_SECRET
-        )
+        event = stripe.Event.construct_from(json.loads(payload), stripe.api_key)
     except ValueError as e:
         return HttpResponse(status=400)
-    except stripe.error.SignatureVerificationError as e:
-        return HttpResponse(status=400)
-    if event['type'] == 'checkout.session.completed':
-        session = event['data']['object']
-        session_id = session.get('id', None)
+
+    if event.type == 'payment_intent.succeeded':
+        payment_intent = event.data.object
         time.sleep(15)
-        line_items = stripe.checkout.Session.list_line_items(session_id, limit=1)
-        cart = Cart.objects.get(stripe_checkout_id=session_id, completed=False)
+        cart = Cart.objects.get(stripe_checkout_id=payment_intent.created, completed=False)
+        print(cart)
         cart.completed = True
         cart.save()
+        print(cart)
+    elif event.type == 'payment_method.attached':
+        payment_method = event.data.object
+    else:
+        print('Unhandled event type {}'.format(event.type))
+
     return HttpResponse(status=200)
-
-
-# class Checkout(View):
-#     def post(self, request, *args, **kwargs):
-#         checkout_session = stripe.checkout.Session.create(
-#             line_items=[
-#                 {
-#                     # Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-#                     'price': '{{PRICE_ID}}',
-#                     'quantity': 1,
-#                 },
-#             ],
-#             mode='payment',
-#             success_url=YOUR_DOMAIN + '/success.html',
-#             cancel_url=YOUR_DOMAIN + '/cancel.html',
-#         )
-#         return JsonResponse()
