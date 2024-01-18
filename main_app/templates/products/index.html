@@ -1,32 +1,41 @@
 {% extends 'base.html' %}
 {% block content %}
 
+<div class="parallax-container">
+    <div class="parallax"><img src="../../static/product_images/c8ed7025-4195-408d-88af-2ff0668141e7.jpeg"></div>
+  </div>
+  <div class="section white">
+    <div class="row container">
+      <h2 class="header">Parallax</h2>
+      <p class="grey-text text-darken-3 lighten-3">Parallax is an effect where the background content or image in this case, is moved at a different speed than the foreground content while scrolling.</p>
+    </div>
+  </div>
+  <div class="parallax-container">
+    <div class="parallax"><img src="images/parallax2.jpg"></div>
+  </div>
 <h1>Catalog</h1>
 <div class="row">
+    
 {% for product in catalog %}
 
-    <div class="col s6">
-        <div class="card"> 
-            <div class="card-content">
-                
-                <span class="card-title">{{product.name}}</span>
-                <img class="card-image" src="{{product.image.url}}" alt="product">
-                <p>{{product.description}}</p>
-                <p>{{product.price}}</p>
-                <p>{{product.quantity}} left!</span>
-                
-                    <div>
-                      
-                        <button data-product="{{product.id}}" data-action="add" id="updateItem" type="submit" >ADD TO CART</button> 
-                       
-                        <a href="{% url 'product_detail' product.id %}"> <button>VIEW</button> </a>
-                    </div>
-                
-                
-                
+    <div class="col s10">
+        <div class="card sticky-action">
+            <div class="card-image waves-effect waves-block waves-light">
+              <img class="activator" src="{{product.image.url}}" alt="product">
             </div>
-
-        </div>
+            <div class="card-content">
+              <span class="card-title activator grey-text text-darken-4">{{product.name}}<i class="material-icons right">more_vert</i></span>
+              <p>{{product.price}}</p>
+            </div>
+            <div class="card-reveal">
+              <span class="card-title grey-text text-darken-4">{{product.name}}<i class="material-icons right">close</i></span>
+              <p>{{product.description}}</p>
+            </div>
+            <div class="card-action">
+                <button data-product="{{product.id}}" data-action="add" id="updateItem" type="submit" >ADD TO CART</button>  
+                <a href="{% url 'product_detail' product.id %}"> <button>VIEW</button> </a>
+            </div>
+          </div>
     </div>
 
 {% endfor %}

@@ -123,6 +123,7 @@ def confirm_payment(request):
     print(customer.created)
     cart = Cart.objects.get(customer=user, completed=False)
     cart.stripe_checkout_id = customer.created
+    cart.completed = True
     cart.save()
     messages.success(request, 'Payment Successful!')
     return redirect('orders')
@@ -151,6 +152,21 @@ def create_checkout_session(request):
             success_url= settings.REDIRECT_URL + '/success?session_id={CHECKOUT_SESSION_ID}',
             cancel_url= settings.REDIRECT_URL + '/cart/',
             metadata = {'user': user},
+            shipping_address_collection = {
+                'allowed_countries': ['US', 'GB', 'CA']
+            },
+            shipping_options = [{
+                'id': 'basic',
+                'label': '2-3 Business Days',
+                'detail': 'Ground shipping via USPS',
+                'amount': 0,
+            },
+            {
+                'id': 'express',
+                'label': 'Next Business Days',
+                'detail': 'Ground shipping via UPS or FedEx',
+                'amount': 995,
+            }],
         )
     except Exception as e:
         return str(e)

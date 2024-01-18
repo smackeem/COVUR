@@ -6,14 +6,18 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>COVUR</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+  {% load bootstrap5 %}
+  {% bootstrap_css %}
+  {% bootstrap_javascript %}
 </head>
 <body>
   <header class="navbar-fixed">
     <nav>
       <div class="nav-wrapper">
         <ul>
-          <li><a href="/" class="left brand-logo">&nbsp;&nbsp;COVUR</a></li>
+          <li><a href="/" class="left brand-logo">COVUR</a></li>
         </ul>
         <ul class="right">
           <li><a href="{% url 'cart' %}">Cart {% if cart.num_of_items %}<span id="num_of_items">{{cart.num_of_items}} </span> {% else %} 0 {% endif %}</a></li>

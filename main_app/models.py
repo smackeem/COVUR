@@ -1,5 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.urls import reverse
 
 # Create your models here.
 class Customer(AbstractUser):
@@ -26,6 +27,9 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+    
+    def get_absolute_url(self):
+        return reverse('details', kwargs={'product_id': self.id})
 
 
 
@@ -44,6 +48,9 @@ class Cart(models.Model):
     def num_of_items(self):
         items = self.cartitems.all()
         return sum([item.quantity for item in items])
+    
+    def get_absolute_url(self):
+        return reverse('details', kwargs={'cart_id': self.id})
 
         
 
@@ -65,10 +72,13 @@ class CartItem(models.Model):
 
     @property
     def price(self):
-        return self.quantity * self.product.price
+        return round(self.quantity * self.product.price, 2)
 
     def __str__(self):
         return f"{self.quantity} {self.product.name}"
+    
+    def get_absolute_url(self):
+        return reverse('details', kwargs={'cartitem_id': self.id})
  
 class OrderItem(models.Model):
     cart = models.ForeignKey(Cart, on_delete = models.CASCADE)
