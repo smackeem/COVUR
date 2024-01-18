@@ -41,14 +41,17 @@ def login_view(request):
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
             login(request, form.get_user())
-
-            cart = Cart.objects.get(session_id = request.session['nonuser'], completed=False)
-            if Cart.objects.filter(customer=request.user, completed=False).exists():
-                cart.customer = None
-                cart.save()
-            else:
-                cart.customer = request.user 
-                cart.save()
+            
+            try:
+                session_cart = Cart.objects.get(session_id = request.session['nonuser'], completed=False)
+                if Cart.objects.filter(customer=request.user, completed=False).exists():
+                    session_cart.customer = None
+                    session_cart.save()
+                else:
+                    session_cart.customer = request.user 
+                    session_cart.save()
+            except:
+                pass
 
             return redirect('catalog')
         else:
@@ -65,7 +68,14 @@ def cart(request):
     return render(request, 'cart.html', {'user': request.user})
 
 def orders_view(request):
-    return render(request, 'orders.html', {'user': request.user})
+    if request.user.is_authenticated:
+        orders = Cart.objects.filter(customer=request.user, completed=True)
+    return render(request, 'orders/index.html', {'user': request.user, 'orders': orders})
+
+def order_details(request, order_id):
+    if request.user.is_authenticated:
+        order = Cart.objects.get(stripe_checkout_id= order_id)
+    return render(request, 'orders/details.html', {'order': order, 'user': request.user})
 
 def add_to_cart(request):
     if request.body:
@@ -118,8 +128,9 @@ def confirm_payment(request):
     return redirect('orders')
 
 def create_checkout_session(request):
-    user = str(request.POST['username'])
-    price = float(request.POST['price'])
+    user = request.POST['username']
+    price = float(request.POST['price']) 
+    price = int(price * 100)
     quantity = int(request.POST['quantity'])
     try:
         stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -129,11 +140,11 @@ def create_checkout_session(request):
       'price_data': {
         'currency': 'usd',
         'product_data': {
-          'name': 'COVUR',
+          'name': f'{quantity} Items',
         },
-        'unit_amount': 2000,
+        'unit_amount': price,
       },
-      'quantity': quantity,
+      'quantity': 1,
     }],
             mode='payment',
             customer_creation = 'always',

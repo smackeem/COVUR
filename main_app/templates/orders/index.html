@@ -1,0 +1,22 @@
+{% extends 'base.html' %} {% block content %}
+
+<h2>Orders</h2>
+
+{% if orders %}
+
+<div class="row-6">
+    {% for order in orders%}
+    <div class="card">
+        <p class="card-title">{{order.total}}</p>
+        <ul>
+            {%for item in order.cartitems.all %}
+            <li>{{item.product.name}}</li>
+            {% endfor %}
+        </ul>
+        <a href="{% url 'order_details' order.stripe_checkout_id %}" class="btn">View</a>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+{% endblock %}
