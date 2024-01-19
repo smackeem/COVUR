@@ -30,7 +30,7 @@
           <ul class="right">
             <li >
               <a class="d-flex no_underline" href="{% url 'cart' %}">
-                <i class="medium material-icons">shopping_cart</i> 
+                <i class="medium material-icons right">shopping_cart</i> 
                 {% if cart.num_of_items %}<span class="align-self-start" id="num_of_items"
                   >{{cart.num_of_items}}
                 </span>
@@ -38,11 +38,11 @@
               >
             </li>
             {% if request.user.is_authenticated %}
-            <li><a href="{% url 'orders' %}">ORDERS</a></li>
-            <li><a href="{% url 'logout' %}">LOGOUT</a></li>
+            <li><a class="no_underline" href="{% url 'orders' %}">ORDERS</a></li>
+            <li><a class="no_underline" href="{% url 'logout' %}">LOGOUT</a></li>
             {% else %}
-            <li><a href="{% url 'signup' %}">SIGN UP</a></li>
-            <li><a href="{% url 'login' %}">LOGIN</a></li>
+            <li><a class="no_underline" href="{% url 'signup' %}">SIGN UP</a></li>
+            <li><a class="no_underline" href="{% url 'login' %}">LOGIN</a></li>
             {% endif %}
           </ul>
         </div>

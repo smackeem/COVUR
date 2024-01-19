@@ -8,11 +8,15 @@ body {
   
   main {
     flex: 1 0 auto;
+    height: 100vh;
   }
   
   footer.page-footer {
     padding-top: 0;
   }
   .no_underline {
+    text-decoration: none;
+  }
+  a {
     text-decoration: none;
   }

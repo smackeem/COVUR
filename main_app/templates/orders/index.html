@@ -13,7 +13,7 @@
           <p>Items: {{ order.num_of_items }}<br>
             Total: ${{ order.total }}
           </p>
-          <a href="{% url 'order_details' order.stripe_checkout_id %}" class="secondary-content">view</a>
+          <a href="{% url 'order_details' order.stripe_checkout_id %}" class="secondary-content">details</a>
         </li>
 
     {% endfor %}
