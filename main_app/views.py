@@ -3,6 +3,7 @@ from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.views import View
 from django.conf import settings
@@ -67,11 +68,13 @@ def signout(request):
 def cart(request):
     return render(request, 'cart.html', {'user': request.user})
 
+@login_required
 def orders_view(request):
     if request.user.is_authenticated:
         orders = Cart.objects.filter(customer=request.user, completed=True)
     return render(request, 'orders/index.html', {'user': request.user, 'orders': orders})
 
+@login_required
 def order_details(request, order_id):
     if request.user.is_authenticated:
         order = Cart.objects.get(stripe_checkout_id= order_id)
@@ -112,6 +115,7 @@ def add_to_cart(request):
 
     return JsonResponse(num_of_items, safe=False)
 
+@login_required
 def confirm_payment(request):
     stripe.api_key = settings.STRIPE_SECRET_KEY
     print(request)
@@ -129,6 +133,7 @@ def confirm_payment(request):
     messages.success(request, 'Payment Successful!')
     return redirect('orders')
 
+@login_required
 def create_checkout_session(request):
     user = request.POST['username']
     price = float(request.POST['price']) 
@@ -177,7 +182,8 @@ def create_checkout_session(request):
 def checkoutpage(request):
     return render(request, 'checkout.html', {'user': request.user})
 
-@csrf_exempt
+@login_required
+@csrf_exempt 
 def stripe_webhook(request):
     stripe.api_key = settings.STRIPE_SECRET_KEY
     time.sleep(10)
