@@ -6,6 +6,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from django.views import View
 from django.conf import settings
+from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
 from .forms import SignUpForm
 from .models import Product, Cart, CartItem, Customer
@@ -124,6 +125,7 @@ def confirm_payment(request):
     cart = Cart.objects.get(customer=user, completed=False)
     cart.stripe_checkout_id = customer.created
     cart.completed = True
+    cart.success_date = timezone.now()
     cart.save()
     messages.success(request, 'Payment Successful!')
     return redirect('orders')
