@@ -39,7 +39,7 @@ class Cart(models.Model):
     completed = models.BooleanField(default=False)
     session_id = models.CharField(max_length=100, null=True, blank=True)
     stripe_checkout_id = models.CharField(max_length=100, null=True, blank=True)
-
+    success_date = models.DateTimeField(null=True, blank=True)
 
     @property
     def total(self):
