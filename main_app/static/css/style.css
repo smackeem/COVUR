@@ -5,7 +5,10 @@ body {
     background-color: whitesmoke;
     text-decoration: none;
   }
-  
+  nav{
+    /* background-color: rgba(245, 245, 245, 0.768);
+    color: black; */
+  }
   main {
     flex: 1 0 auto;
     /* height: 100vh; */

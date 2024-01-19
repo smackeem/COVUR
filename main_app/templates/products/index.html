@@ -11,9 +11,9 @@
                     <img class="card-img-top" src="{{product.image.url}}" alt="product">
                     <div class="card-body">
                         <h5 class="card-title">{{product.name}}</h5>
-                        <p class="card-text">{{product.price}}</p>
+                        <p class="card-text">${{product.price}}</p>
                     </div>
-                    <div class="card-footer">
+                    <div class="card-footer d-flex justify-content-around">
                         <button data-product="{{product.id}}" data-action="add" id="updateItem" type="submit" class="btn btn-primary">ADD TO CART</button>
                         <a href="{% url 'product_detail' product.id %}" class="btn btn-secondary">VIEW</a>
                     </div>

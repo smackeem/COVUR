@@ -4,6 +4,14 @@ updateItemBtns.forEach((btn) => {
   btn.addEventListener("click", updateCart);
 });
 
+document.querySelectorAll('.alert .close').forEach(function(closeButton) {
+  closeButton.addEventListener('click', function() {
+    var alert = this.closest('.alert');
+    if (alert) {
+      alert.classList.add('d-none');
+    }
+  });
+});
 
 function updateCart(e) {
   e.preventDefault();

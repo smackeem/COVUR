@@ -53,7 +53,6 @@ def login_view(request):
                     session_cart.save()
             except:
                 pass
-
             return redirect('catalog')
         else:
             messages.warning(request, 'Username and Password do not match. Please try again!')
