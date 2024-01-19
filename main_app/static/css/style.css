@@ -3,6 +3,7 @@ body {
     min-height: 100vh;
     flex-direction: column;
     background-color: whitesmoke;
+    text-decoration: none;
   }
   
   main {
@@ -11,4 +12,7 @@ body {
   
   footer.page-footer {
     padding-top: 0;
+  }
+  .no_underline {
+    text-decoration: none;
   }

@@ -1,73 +1,81 @@
 {% load static %}
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>COVUR</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-  {% load bootstrap5 %}
-  {% bootstrap_css %}
-  {% bootstrap_javascript %}
-</head>
-<body>
-  <header class="navbar-fixed">
-    <nav>
-      <div class="nav-wrapper">
-        <ul>
-          <li><a href="/" class="left brand-logo">COVUR</a></li>
-        </ul>
-        <ul class="right">
-          <li><a href="{% url 'cart' %}">Cart {% if cart.num_of_items %}<span id="num_of_items">{{cart.num_of_items}} </span> {% else %} 0 {% endif %}</a></li>
-          {% if request.user.is_authenticated %}
-          <li><a href="{% url 'orders' %}">Orders</a></li>
-          <li><a href="{% url 'logout' %}">Logout</a></li>
-          {% else %}
-          <li><a href="{% url 'signup' %}">Sign Up</a></li>
-          <li><a href="{% url 'login' %}">Login</a></li>
-          {% endif %}
-          
-
-        </ul>
-      </div>
-    </nav>
-    <script>
-      let user = '{{ request.user }}'
-      function getCookie(name) {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
-}
-const csrftoken = getCookie('csrftoken');
-    </script>
-    
-  </header>
-  <main class="container">
-    {% if messages %}     
-        {% for message in messages %}  
-        <div>
-          {{ message }}
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>COVUR</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/style.css' %}"
+    />
+    {% load bootstrap5 %} {% bootstrap_css %} {% bootstrap_javascript %}
+  </head>
+  <body>
+    <header class="navbar-fixed">
+      <nav class="px-4">
+        <div class="nav-wrapper">
+          <ul>
+            <li><a href="/" class="left brand-logo no_underline">COVUR<i class="large material-icons">store</i></a></li>
+          </ul>
+          <ul class="right">
+            <li >
+              <a class="d-flex no_underline" href="{% url 'cart' %}">
+                <i class="medium material-icons">shopping_cart</i> 
+                {% if cart.num_of_items %}<span class="align-self-start" id="num_of_items"
+                  >{{cart.num_of_items}}
+                </span>
+                {% else %} 0 {% endif %}</a
+              >
+            </li>
+            {% if request.user.is_authenticated %}
+            <li><a href="{% url 'orders' %}">ORDERS</a></li>
+            <li><a href="{% url 'logout' %}">LOGOUT</a></li>
+            {% else %}
+            <li><a href="{% url 'signup' %}">SIGN UP</a></li>
+            <li><a href="{% url 'login' %}">LOGIN</a></li>
+            {% endif %}
+          </ul>
         </div>
-        {% endfor %}  
-    <hr>
-    {% endif %} 
-
-    {% block content %}
+      </nav>
+      <script>
+        let user = "{{ request.user }}";
+        function getCookie(name) {
+          let cookieValue = null;
+          if (document.cookie && document.cookie !== "") {
+            const cookies = document.cookie.split(";");
+            for (let i = 0; i < cookies.length; i++) {
+              const cookie = cookies[i].trim();
+              if (cookie.substring(0, name.length + 1) === name + "=") {
+                cookieValue = decodeURIComponent(
+                  cookie.substring(name.length + 1)
+                );
+                break;
+              }
+            }
+          }
+          return cookieValue;
+        }
+        const csrftoken = getCookie("csrftoken");
+      </script>
+    </header>
+    <main class="container">
+      {% if messages %} {% for message in messages %}
+      <div>{{ message }}</div>
+      {% endfor %}
+      <hr />
+      {% endif %} {% block content %} {% endblock %}
+      <script src="{% static 'script/script.js' %}"></script>
+    </main>
     
-    {% endblock %}
-    <script src="{% static 'script/script.js' %}"></script>
-  </main>
-  
-</body>
+  </body>
 </html>

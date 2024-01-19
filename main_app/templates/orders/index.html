@@ -1,21 +1,23 @@
 {% extends 'base.html' %} {% block content %}
 
-<h2>Orders</h2>
+<h2 class="mt-5">{{user.first_name}}'s Orders</h2>
 
 {% if orders %}
 
-<div class="row-6">
+<div class="container mt-5">
+    <ul class="collection">
     {% for order in orders%}
-    <div class="card">
-        <p class="card-title">{{order.total}}</p>
-        <ul>
-            {%for item in order.cartitems.all %}
-            <li>{{item.product.name}}</li>
-            {% endfor %}
-        </ul>
-        <a href="{% url 'order_details' order.stripe_checkout_id %}" class="btn">View</a>
-    </div>
+        <li class="card collection-item avatar">
+            <i class="material-icons circle green">receipt</i>
+          <span class="title h3">Order #: {{ order.stripe_checkout_id }}</span>
+          <p>Items: {{ order.num_of_items }}<br>
+            Total: ${{ order.total }}
+          </p>
+          <a href="{% url 'order_details' order.stripe_checkout_id %}" class="secondary-content">view</a>
+        </li>
+
     {% endfor %}
+</ul>
 </div>
 {% endif %}
 

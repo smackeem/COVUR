@@ -1,6 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.urls import reverse
+from django.utils import timezone
 
 # Create your models here.
 class Customer(AbstractUser):
@@ -38,6 +39,7 @@ class Cart(models.Model):
     completed = models.BooleanField(default=False)
     session_id = models.CharField(max_length=100, null=True, blank=True)
     stripe_checkout_id = models.CharField(max_length=100, null=True, blank=True)
+
 
     @property
     def total(self):
