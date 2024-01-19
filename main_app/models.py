@@ -12,7 +12,7 @@ class Customer(AbstractUser):
 
 class Product(models.Model):
     name = models.CharField(max_length=50)
-    description = models.CharField(max_length=250, default='')
+    description = models.TextField(default='')
     price = models.FloatField(default=0)
     quantity = models.IntegerField(default=0)
     image = models.ImageField(upload_to='images')
