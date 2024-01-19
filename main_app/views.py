@@ -31,7 +31,7 @@ def signup(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'Account created successfully. Please log in.')
-            return redirect('/login')
+            return redirect('login')
         else:
             messages.warning(request, 'Please check your information and try again!')
     else:
@@ -72,6 +72,7 @@ def cart(request):
 def orders_view(request):
     if request.user.is_authenticated:
         orders = Cart.objects.filter(customer=request.user, completed=True)
+        print(orders)
     return render(request, 'orders/index.html', {'user': request.user, 'orders': orders})
 
 @login_required
@@ -122,9 +123,9 @@ def confirm_payment(request):
     checkout_session_id = request.GET.get('session_id', None)
     print('checkout id: ',checkout_session_id)
     session = stripe.checkout.Session.retrieve(checkout_session_id)
+    print(session)
     user = Customer.objects.get(username = session.metadata.user)
     customer = stripe.Customer.retrieve(session.customer)
-    print(customer.created)
     cart = Cart.objects.get(customer=user, completed=False)
     cart.stripe_checkout_id = customer.created
     cart.completed = True
@@ -134,11 +135,11 @@ def confirm_payment(request):
     return redirect('orders')
 
 @login_required
-def create_checkout_session(request):
+def create_checkout_session(request, cart_id):
+    cart = Cart.objects.get(id=cart_id, completed=False)
     user = request.POST['username']
-    price = float(request.POST['price']) 
-    price = int(price * 100)
-    quantity = int(request.POST['quantity'])
+    price = int(cart.total * 100)
+    quantity = cart.num_of_items
     try:
         stripe.api_key = settings.STRIPE_SECRET_KEY
         print('trying')
@@ -161,18 +162,6 @@ def create_checkout_session(request):
             shipping_address_collection = {
                 'allowed_countries': ['US', 'GB', 'CA']
             },
-            shipping_options = [{
-                'id': 'basic',
-                'label': '2-3 Business Days',
-                'detail': 'Ground shipping via USPS',
-                'amount': 0,
-            },
-            {
-                'id': 'express',
-                'label': 'Next Business Days',
-                'detail': 'Ground shipping via UPS or FedEx',
-                'amount': 995,
-            }],
         )
     except Exception as e:
         return str(e)

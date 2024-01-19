@@ -123,6 +123,8 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR/'static']
 
+LOGIN_URL ='/account/login/'
+
 MEDIA_URL = "/image/"
 MEDIA_ROOT = BASE_DIR/"media"
 
@@ -137,3 +139,7 @@ STRIPE_SECRET_KEY = "sk_test_51OYwERCVfszziAas4QOrypXLShGI9RiJUXDiONNmvEarEP3QP1
 STRIPE_WEBHOOK_SECRET = "http://127.0.0.1:8000/web_hooks/"
 
 REDIRECT_URL = 'http://127.0.0.1:8000'
+
+
+import django_on_heroku
+django_on_heroku.settings(locals())

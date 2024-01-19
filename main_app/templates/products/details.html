@@ -1,17 +1,24 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<div class="card"> 
-    <div class="card-content">
-    
-        <span class="card-title">{{product.name}}</span>
-        <img class="card-image" src="{{product.image.url}}" alt="product">
-        <p>{{product.description}}</p>
-        <p>{{product.price}}</p>
-        <p>{{product.quantity}} left!</p>
-            <button data-product="{{product.id}}" data-action="add" class="btn" id="updateItem" type="submit" >ADD TO CART</button> 
-     
+<div class="my-5 container card">
+    <div class="row my-3 ">
+        <div class="col-md-4">
+            <img class="img-fluid img-thumbnail" src="{{product.image.url}}" alt="product">
+        </div>
+        <div class="col-md-8 d-flex flex-column justify-content-between">
+            <div class="d-flex justify-content-between">
+                <span class="text-left h2">{{product.name}}</span> 
+                <span class="text-right h3">$ {{product.price}} USD</span>
+            </div>
+            
+            <p class=" align-self-center col-10">{{product.description}}</p>
+           
+            <button data-product="{{product.id}}" data-action="add" id="updateItem" type="submit" class="btn btn-primary">ADD TO CART</button>
+            
+           
+        </div>
     </div>
-
 </div>
+
 {% endblock %}

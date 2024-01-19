@@ -2,6 +2,10 @@
 
 <h2 class="mt-5">Login</h2>
 
+{% if next %}
+    <p class="warning">Please login to access this page.</p>
+{% endif %}
+
 <form class="mt-5" method="POST">
   {% csrf_token %} {{ form.as_p }}
   <input type="hidden" name="next" value="{{ next }}">
