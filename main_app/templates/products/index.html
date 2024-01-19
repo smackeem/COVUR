@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 {% block content %}
+{% load static %}
 
+<div class="parallax-container mt-5">
+    <div class="parallax"><img src="{% static product_images/products.jpeg %}"></div>
+  </div>
 <h1 class="mt-5">Catalog</h1>
 
 <div class="container mt-5">
