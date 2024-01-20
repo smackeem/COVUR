@@ -11,8 +11,8 @@ from django.conf import settings
 from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .forms import SignUpForm
-from .models import Product, Cart, CartItem, Customer
+from .forms import SignUpForm, ReviewForm
+from .models import Product, Cart, CartItem, Customer, Review
 
 
 # Create your views here.
@@ -25,7 +25,8 @@ def catalog(request):
 
 def product_details(request, product_id):
     product = Product.objects.get(id=product_id)
-    return render(request, 'products/detail.html', {'product': product, 'user': request.user})
+    review_form = ReviewForm
+    return render(request, 'products/detail.html', {'product': product, 'user': request.user, 'review_form': review_form})
 
 def is_superuser(user):
     return user.is_authenticated and user.is_superuser
@@ -42,7 +43,7 @@ class ProductCreate(CreateView):
 class ProductUpdate(UpdateView):
     model = Product
     fields = '__all__'
-    
+
 @method_decorator(login_required, name='dispatch')
 @method_decorator(user_passes_test(is_superuser), name='dispatch')
 class ProductDelete(DeleteView):
@@ -221,3 +222,21 @@ def stripe_webhook(request):
         print('Unhandled event type {}'.format(event.type))
 
     return HttpResponse(status=200)
+
+def add_review(request, product_id):
+    form = ReviewForm(request.POST)
+    if form.is_valid():
+        new_review = form.save(commit=False)
+        print(new_review)
+        new_review.product_id = product_id
+        print(request.user.id)
+        new_review.customer_id = request.user.id
+        new_review.date = timezone.now()
+        new_review.save()
+    return redirect('product_detail', product_id=product_id)
+
+def remove_review(request, fk, pk):
+    review = Review.objects.get(id=pk)
+    if review:
+        review.delete()
+    return redirect('product_detail', product_id=fk)

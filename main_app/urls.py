@@ -18,6 +18,7 @@ urlpatterns = [
     path('products/create/', views.ProductCreate.as_view(), name='products_create'),
     path('products/<int:pk>/update/', views.ProductUpdate.as_view(), name='products_update'),
     path('products/<int:pk>/delete/', views.ProductDelete.as_view(), name='products_delete'),
-    # path('products/<int:products_id>/reviews/create', views.write_review, name='review_create')
+    path('products/<int:product_id>/reviews/create', views.add_review, name='review_create'),
+    path('products/<int:fk>/reviews/<int:pk>', views.remove_review, name='review_delete'),
 ]
 	

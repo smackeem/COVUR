@@ -1,7 +1,8 @@
 from django import forms
+from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
-from .models import Customer
+from .models import Customer, Review
 
 
 class SignUpForm(UserCreationForm):
@@ -20,4 +21,8 @@ class SignUpForm(UserCreationForm):
             raise ValidationError(" Email Already Exist")  
         return email
 
+class ReviewForm(ModelForm):
+    class Meta:
+        model = Review
+        fields = ['stars', 'content']
     

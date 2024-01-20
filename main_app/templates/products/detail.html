@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
+{% load static %}
 <div class="container">
 <div class="in-app-nav">
     <a href="{% url 'catalog' %}">Home</a> > <span>{{product.name}}</span>
@@ -14,8 +15,11 @@
                 <span class="text-left h2">{{product.name}}</span> 
                 <span class="text-right h3">$ {{product.price}} USD</span>
             </div>
+            <div class="d-flex justify-content-center align-items-start">
+                <blockquote class=" align-self-center col-5 "><span class="h5" >Product Description:</span> <br><br>{{product.description}}</blockquote>
+                <blockquote class=" align-self-center col-5 "><span class="h5">Ingredients:</span> <br><br>{{product.ingredients}}</blockquote>
+            </div>
             
-            <blockquote class=" align-self-center col-10 ">{{product.description}}</blockquote>
            
             <button data-product="{{product.id}}" data-action="add" id="updateItem" type="submit" class="btn z-depth-4 amber darken-2 white-text">ADD TO CART</button>
             {% if request.user.is_authenticated and request.user.is_superuser %}
@@ -26,6 +30,36 @@
            {% endif %}
         </div>
     </div>
+</div>
+<div class="my-5 col s6">
+    <h1 class="my-5">Reviews</h1>
+{% if product.review_set.all%}
+{% for review in product.review_set.all %}
+
+    <ul class="collection card">
+        <li class="collection-item avatar">
+        <img src="{% static 'product_images/user.png' %}" alt="" class="circle">
+        From:<span class="title amber-text text-darken-3"> {{review.customer.username}}</span>  <span class="mt-1"> on {{review.date}}</span>
+          <blockquote class="mt-2">{{review.content}}</blockquote> 
+        {% if review.customer == request.user %}
+        <a href="{% url 'review_delete' review.customer.id review.id %}" class="secondary-content"><i class="material-icons">clear</i></a>
+            {% endif %}
+        </li>
+    </ul>
+
+{% endfor %}
+
+{% else %}
+<div><p>No Reviews Yet.</p></div>
+{% endif %}
+
+    <form class="mt-5" action="{% url 'review_create' product.id %}" method="post">
+        <h2>Write A Review</h2>
+        {% csrf_token %}
+        {{ review_form.as_p }}
+        <input type="submit" class="btn" value="Add Review">
+    </form>
+    
 </div>
 </div>
 

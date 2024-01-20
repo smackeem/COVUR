@@ -95,10 +95,14 @@ class Review(models.Model):
     product = models.ForeignKey(Product, on_delete = models.CASCADE)
     stars = models.PositiveIntegerField(validators=[MaxValueValidator(limit_value=100)])
     content = models.TextField(max_length=250)
-    date = models.DateField()
+    date = models.DateTimeField()
 
     def __str__(self):
         return f'{self.stars} Stars on {self.date}'
     
+    def get_absolute_url(self):
+        return reverse('review_delete', kwargs={'fk': self.customer.id,'pk': self.id})
     class Meta:
         ordering = ['-date']
+
+    
