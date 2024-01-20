@@ -1,24 +1,27 @@
 {% extends 'base.html' %} {% block content %}
-
+<div class="container">
+<div class="in-app-nav">
+  <a href="{% url 'catalog' %}">Home</a> > <span>Orders</span>
+</div>
 <h2 class="mt-5">{{user.first_name}}'s Orders</h2>
 
 {% if orders %}
 
-<div class="container mt-5">
-    <ul class="collection">
+<div class="container mt-5 ">
+    <ul class="collection z-depth-4 ">
     {% for order in orders%}
-        <li class="card collection-item avatar">
-            <i class="material-icons circle green">receipt</i>
-          <span class="title h3">Order #: {{ order.stripe_checkout_id }}</span>
+        <li class="card collection-item avatar z-depth-2 ">
+            <i class="material-icons circle green z-depth-2">receipt</i>
+          <span class="title h2">Order #: {{ order.stripe_checkout_id }}</span>
           <p>Items: {{ order.num_of_items }}<br>
             Total: ${{ order.total }}
           </p>
-          <a href="{% url 'order_details' order.stripe_checkout_id %}" class="secondary-content">details</a>
+          <a href="{% url 'order_details' order.stripe_checkout_id %}" class="secondary-content amber darken-2 btn-floating pulse z-depth-2"><i class="material-icons">info_outline</i></a>
         </li>
 
     {% endfor %}
 </ul>
 </div>
 {% endif %}
-
+</div>
 {% endblock %}

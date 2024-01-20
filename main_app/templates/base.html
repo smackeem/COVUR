@@ -22,26 +22,38 @@
   </head>
   <body>
     <header class="navbar-fixed">
-      <nav class="px-4 blue-grey darken-4 z-depth-5" >
+      <nav class="px-4 blue-grey darken-4 z-depth-5">
         <div class="nav-wrapper">
           <ul>
-            <li><a href="/" class="left brand-logo no_underline">COVUR<i class="large material-icons right">store</i></a></li>
+            <li>
+              <a href="/" class="left brand-logo no_underline"
+                >COVUR<i class="large material-icons right">store</i></a
+              >
+            </li>
           </ul>
           <ul class="right">
-            <li >
-              <a class="d-flex no_underline " href="{% url 'cart' %}">
-                <i class="medium material-icons right">shopping_cart</i> 
-                {% if cart.num_of_items %}<span class="align-self-start" id="num_of_items"
+            <li>
+              <a class="d-flex no_underline" href="{% url 'cart' %}">
+                <i class="medium material-icons right">shopping_cart</i>
+                {% if cart.num_of_items %}<span
+                  class="align-self-start"
+                  id="num_of_items"
                   >{{cart.num_of_items}}
                 </span>
                 {% else %} 0 {% endif %}</a
               >
             </li>
             {% if request.user.is_authenticated %}
-            <li><a class="no_underline" href="{% url 'orders' %}">ORDERS</a></li>
-            <li><a class="no_underline" href="{% url 'logout' %}">LOGOUT</a></li>
+            <li>
+              <a class="no_underline" href="{% url 'orders' %}">ORDERS</a>
+            </li>
+            <li>
+              <a class="no_underline" href="{% url 'logout' %}">LOGOUT</a>
+            </li>
             {% else %}
-            <li><a class="no_underline" href="{% url 'signup' %}">SIGN UP</a></li>
+            <li>
+              <a class="no_underline" href="{% url 'signup' %}">SIGN UP</a>
+            </li>
             <li><a class="no_underline" href="{% url 'login' %}">LOGIN</a></li>
             {% endif %}
           </ul>
@@ -69,17 +81,16 @@
       </script>
     </header>
     {% if messages %} {% for message in messages %}
-      <div class="alert alert-{{ message.tags }} alert-dismissible fade show">
-        {{ message|safe }}  
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show">
+      {{ message|safe }}
     </div>
-      {% endfor %}
-      {% endif %}
-    <main class="container">
-       {% block content %} {% endblock %}
+    {% endfor %} {% endif %}
+    <main>
+      {% block content %} {% endblock %}
       <script src="{% static 'script/script.js' %}"></script>
     </main>
-    
-    <!-- <footer class="mt-5 page-footer">
+
+    <footer class="mt-5 page-footer d-flex flex-column align-items-center blue-grey darken-4 z-depth-5">
       <div class="container">
         <div class="row p-3">
           <div class="col l6 s12">
@@ -109,20 +120,22 @@
           <div class="col l4 offset-l2 s12">
             <h5 class="white-text">ABOUT</h5>
             <p>
-              COVUR, a premier men's beauty brand, champions the idea that
-              skincare is essential for every man's confidence. Our meticulously
-              crafted products, from revitalizing moisturizers to invigorating
-              toners, blend science and luxury to ensure a grooming experience
-              that enhances strength, resilience, and timeless appeal. Choose
-              COVUR to effortlessly achieve and maintain healthy, well-nurtured
-              skin that speaks volumes about your self-care commitment.
+              COVUR, a leading men's beauty brand, passionately advocates that
+              skincare is paramount for every man's confidence. Our meticulously
+              crafted products, infused with the detoxifying power of charcoal,
+              from revitalizing moisturizers to invigorating toners, seamlessly
+              blend science and luxury. Experience a grooming journey that not
+              only enhances strength and resilience but also provides the health
+              benefits of charcoal, ensuring timeless appeal. Choose COVUR to
+              effortlessly achieve and sustain healthy, well-nurtured skin that
+              eloquently speaks to your unwavering commitment to self-care.
             </p>
           </div>
         </div>
       </div>
-      <div class="footer-copyright">
+      <div class="footer-copyright d-flex justify-content-center">
         <div class="container">© COVUR 2024 Copyright</div>
       </div>
-    </footer> -->
+    </footer>
   </body>
 </html>

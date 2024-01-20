@@ -2,9 +2,10 @@
 {% block content %}
 {% load static %}
 
-<div class="parallax-container mt-5">
-    <div ><img src="https://i.ibb.co/2g6NTqS/310224b9-be8d-45c7-95b6-ebb459815f31.jpg"></div>
-  </div>
+<div class="parallax-container bgimg d-flex mt-5">
+    
+</div>
+<div class="container">
 <h1 class="mt-5">Catalog</h1>
 
 <div class="container mt-5">
@@ -15,7 +16,7 @@
                     <img class="card-img-top z-depth-2" src="{{product.image.url}}" alt="product">
                     <div class="card-body">
                         <h5 class="card-title ">{{product.name}}</h5>
-                        <p class="card-text">${{product.price}} USD</p>
+                        <p class="card-text h5">${{product.price}} USD</p>
                     </div>
                     <div class="card-footer d-flex justify-content-around">
                         <button data-product="{{product.id}}" data-action="add" id="updateItem" type="submit" class="btn z-depth-3 white-text amber darken-2">ADD TO CART</button>
@@ -25,5 +26,6 @@
             </div>
         {% endfor %}
     </div>
+</div>
 </div>
 {% endblock %}

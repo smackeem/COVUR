@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
-
-<div class="mt-5">
-    <i></i>
+<div class="container">
+<div class="mt-5 d-flex align-items-center black-text gap-2">
+    <a href="{% url 'catalog' %}" class="no_underline btn-floating pulse amber darken-2 "><i class="medium material-icons">arrow_back</i></a> <span class="h5">CATALOG</span>
 </div>
 <div class="card mt-5 z-depth-4">
     <div class="card-content d-flex justify-content-around align-items-center">
@@ -57,5 +57,5 @@
 
 
 {% endif %}
-
+</div>
 {% endblock %}

@@ -11,7 +11,7 @@ body {
   }
   main {
     flex: 1 0 auto;
-    /* min-height: 100vh; */
+    min-height: 100vh;
   }
   
   footer.page-footer {
@@ -21,3 +21,25 @@ body {
     text-decoration: none;
   }
 
+  .in-app-nav {
+    color: #2c2c2c;
+    font-size: 0.75rem;
+    font-weight: 400;
+    letter-spacing: 0.0225rem;
+    padding: 2rem 0 1.25rem;
+  }
+  .in-app-nav a {
+    color: #2c2c2c;
+  }
+  .in-app-nav a:hover {
+    color: #0057a0;
+  }
+  .in-app-nav span {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+.bgimg{
+  background-image: url('https://i.ibb.co/vJGxcMS/what-is-charcoal-3-1024x1024.jpg');
+
+}
