@@ -81,40 +81,41 @@ def order_details(request, order_id):
         order = Cart.objects.get(stripe_checkout_id= order_id)
     return render(request, 'orders/details.html', {'order': order, 'user': request.user})
 
-def add_to_cart(request):
-    if request.body:
-        data = json.loads(request.body)
-        product_id = data['product']
-        action = data['action']
-        product = Product.objects.get(id=product_id)
-        print(product, action)
+def add_to_cart(request, product_id, action):
+    product = Product.objects.get(id=product_id)
+    print(request)
     
-        if request.user.is_authenticated:
-            cart, created = Cart.objects.get_or_create(customer=request.user, completed=False)
-        else:
-            try:
-                cart = Cart.objects.get(session_id = request.session['nonuser'], completed=False)
+    if request.user.is_authenticated:
+        cart, created = Cart.objects.get_or_create(customer=request.user, completed=False)
+    else:
+        try:
+            cart = Cart.objects.get(session_id = request.session['nonuser'], completed=False)
             
-            except:
-                request.session['nonuser'] = str(uuid.uuid4())
-                cart = Cart.objects.create(session_id = request.session['nonuser'], completed=False)
+        except:
+            request.session['nonuser'] = str(uuid.uuid4())
+            cart = Cart.objects.create(session_id = request.session['nonuser'], completed=False)
         
-        cartItem, created = CartItem.objects.get_or_create(cart=cart, product=product)  
-        match action:
-            case 'add':
-                cartItem.increase_quantity()
-                print('quantity', cartItem.quantity)
+    cartItem, created = CartItem.objects.get_or_create(cart=cart, product=product)  
+    match action:
+        case 'add':
+            cartItem.increase_quantity()
+            print('quantity', cartItem.quantity)
 
-            case 'sub':
-                cartItem.decrease_quantity()
-                print('quantity', cartItem.quantity)
-                if(cartItem.quantity <= 0):
-                    cartItem.delete()
-            case 'del':
+        case 'sub':
+            if(cartItem.quantity <= 0):
                 cartItem.delete()
-        num_of_items = cart.num_of_items     
-
-    return JsonResponse(num_of_items, safe=False)
+            else:
+                cartItem.decrease_quantity()
+            print('quantity', cartItem.quantity)
+        
+        case 'add-to':
+            cartItem.increase_quantity()
+            products = Product.objects.all()    
+            return render(request, 'products/index.html', {'catalog': products})
+                
+        case 'del':
+            cartItem.delete()
+    return render(request, 'cart.html')
 
 @login_required
 def confirm_payment(request):

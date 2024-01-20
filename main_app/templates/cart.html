@@ -36,9 +36,9 @@
                     <td>
                         {{cartitem.product.name}}
                     </td>
-                    <td><a href="#" id="updateItem" data-product="{{cartitem.product.id}}" data-action="sub"><i class="tiny material-icons ">remove_circle_outline</i></a> 
+                    <td><a href="{% url 'add' product_id=cartitem.product.id action='sub' %}" id="updateItem" data-product="{{cartitem.product.id}}" data-action="sub"><i class="tiny material-icons ">remove_circle_outline</i></a> 
                         <span id="num_of_item">{{cartitem.quantity}}</span> 
-                        <a href="#" data-product="{{cartitem.product.id}}" data-action="add" id="updateItem"><i class="tiny material-icons ">add_circle_outline</i></a>
+                        <a href="{% url 'add' product_id=cartitem.product.id action='add' %}" data-product="{{cartitem.product.id}}" data-action="add" id="updateItem"><i class="tiny material-icons ">add_circle_outline</i></a>
                     </td>
                     <td>${{cartitem.product.price}}</td>
                     <td>$<span id="price">{{cartitem.price }}</span></td>

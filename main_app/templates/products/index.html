@@ -19,7 +19,7 @@
                         <p class="card-text h5">${{product.price}} USD</p>
                     </div>
                     <div class="card-footer d-flex justify-content-around">
-                        <button data-product="{{product.id}}" data-action="add" id="updateItem" type="submit" class="btn z-depth-3 white-text amber darken-2">ADD TO CART</button>
+                        <a href="{% url 'add' product_id=product.id action='add-to' %}" data-product="{{product.id}}" data-action="add" id="updateItem" class="btn z-depth-3 white-text amber darken-2">ADD TO CART</a>
                         <a href="{% url 'product_detail' product.id %}" class="btn z-depth-3 btn-secondary">VIEW</a>
                     </div>
                 </div>

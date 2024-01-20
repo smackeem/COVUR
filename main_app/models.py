@@ -13,8 +13,9 @@ class Customer(AbstractUser):
 class Product(models.Model):
     name = models.CharField(max_length=50)
     description = models.TextField(default='')
+    ingredients = models.TextField(default='')
     price = models.FloatField(default=0)
-    quantity = models.IntegerField(default=0)
+    quantity = models.PositiveIntegerField(default=0)
     image = models.ImageField(upload_to='images')
 
     def increase_quantity(self):
@@ -31,6 +32,8 @@ class Product(models.Model):
     def get_absolute_url(self):
         return reverse('details', kwargs={'product_id': self.id})
 
+    class Meta:
+        ordering = ['name']
 
 
 class Cart(models.Model):
@@ -61,7 +64,7 @@ class Cart(models.Model):
 class CartItem(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='items')
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name='cartitems')
-    quantity = models.IntegerField(default=0)
+    quantity = models.PositiveIntegerField(default=0)
 
     def increase_quantity(self):
         self.quantity += 1
@@ -82,6 +85,9 @@ class CartItem(models.Model):
     
     def get_absolute_url(self):
         return reverse('details', kwargs={'cartitem_id': self.id})
+    
+    class Meta:
+        ordering = ['-id']
 
 class Review(models.Model):
     customer = models.ForeignKey(Customer, on_delete = models.CASCADE)
@@ -92,3 +98,6 @@ class Review(models.Model):
 
     def __str__(self):
         return f'{self.stars} Stars on {self.date}'
+    
+    class Meta:
+        ordering = ['-date']
