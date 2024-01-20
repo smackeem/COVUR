@@ -138,7 +138,8 @@ STRIPE_PUBLIC_KEY = "pk_test_51OYwERCVfszziAasrqHuKcAz0fXjy7MlGQ0HoAQoKdrG3ySBPg
 STRIPE_SECRET_KEY = "sk_test_51OYwERCVfszziAas4QOrypXLShGI9RiJUXDiONNmvEarEP3QP1yqJffYpTMKUhCF8snGpbR6j0Ltzt2J0TQLmuxL00elrJGkKN"
 STRIPE_WEBHOOK_SECRET = "http://127.0.0.1:8000/web_hooks/"
 
-REDIRECT_URL = 'http://127.0.0.1:8000'
+# REDIRECT_URL = 'http://127.0.0.1:8000'
+REDIRECT_URL = 'https://covurstore-aef113cfb56b.herokuapp.com/'
 
 
 import django_on_heroku
