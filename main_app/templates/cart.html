@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+<div class="mt-5 d-flex align-items-center black-text gap-2">
+    <a href="{% url 'catalog' %}" class="no_underline btn-floating pulse amber darken-2 "><i class="medium material-icons">arrow_back</i></a> <span class="h5">CATALOG</span>
+</div>
+<div class="card mt-5 z-depth-4">
+    <div class="card-content d-flex justify-content-around align-items-center">
+            <span class="h4" >Items: <strong id="num_of_items">{{cart.num_of_items}}</strong></span>
+           
+            <span class="h4">Total: <strong id="cart_total">${% if cart.total %}{{cart.total}}{% else %}0 {% endif %}</strong></span>
+            
+            {% if cart.num_of_items %}
+            <button type="button" data-toggle="modal" data-target="#myModal" class="btn amber darken-2 white-text z-depth-5">Checkout</button>
+            {% else %}
+            <a class="btn-floating pulse no_underline amber darken-2 pulse z-depth-5" href="/"><i class="material-icons">add</i></a>
+            {% endif %}
+        
+    </div>
+</div>
+{% if cart.cartitems.all %}
+<div class="card">
+    <div class="card-content">
+        <table>
+            <thead>
+                <th></th>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Unit Price</th>
+                <th>Price</th>
+            </thead>
+            <tbody class="collection ">
+                {% for cartitem in cart.cartitems.all %}
+                <tr class="collection-item ">
+                    <td><img class="materialboxed" width="50" src="{{cartitem.product.image.url}}" alt=""></td>
+                    <td>
+                        {{cartitem.product.name}}
+                    </td>
+                    <td><a href="#" id="updateItem" data-product="{{cartitem.product.id}}" data-action="sub"><i class="tiny material-icons ">remove_circle_outline</i></a> 
+                        <span id="num_of_item">{{cartitem.quantity}}</span> 
+                        <a href="#" data-product="{{cartitem.product.id}}" data-action="add" id="updateItem"><i class="tiny material-icons ">add_circle_outline</i></a>
+                    </td>
+                    <td>${{cartitem.product.price}}</td>
+                    <td>$<span id="price">{{cartitem.price }}</span></td>
+                    <td><a href="#" data-product="{{cartitem.product.id}}" data-action="del" id="updateItem" id="remove"><i class="tiny material-icons">clear</i></a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% else %}
+<div class="mt-5 p-5 d-flex justify-content-evenly flex-column align-items-center">
+    <i class="large material-icons right">shopping_cart</i> 
+    
+</div>
+
+
+{% endif %}
+
+<div class="modal popup flex-center-xy mt-5 fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+  
+        <div class="modal-header d-flex justify-content-center">
+          <h4 class="modal-title">Confirm Order</h4>
+        </div>
+  
+        <div class="modal-body">
+          <div class="card mt-5 z-depth-4">
+            <div class="card-content d-flex justify-content-around align-items-center">
+              <span class="h4">Items: <strong id="num_of_items">{{cart.num_of_items}}</strong></span>
+              <span class="h4">Total: <strong id="cart_total">${{cart.total}}</strong></span>
+              <form action="{% url 'checkout' cart.id %}" method="POST">
+                {% csrf_token %}
+                <input hidden value="{{user.username}}" type="text" name="username">
+                <input hidden value="{{cart.num_of_items}}" type="text" name="quantity">
+                <input hidden value="{{cart.total}}" type="text" name="price">
+                <button type="submit" id="checkout-button" class="btn amber darken-2 white-text z-depth-3">PAY</button>
+            </form>
+            </div>
+          </div>
+  
+          <div class="card">
+            <div class="card-content">
+              <table>
+                <thead>
+                  <th></th>
+                  <th>Product</th>
+                  <th>Quantity</th>
+                  <th>Unit Price</th>
+                  <th>Price</th>
+                  </thead>
+                  <tbody class="collection">
+                    {% for cartitem in cart.cartitems.all %}
+                    <tr class="collection-item">
+                      <td><img class="materialboxed" width="50" src="{{cartitem.product.image.url}}" alt=""></td>
+                      <td>{{cartitem.product.name}}</td>
+                      <td><span id="num_of_item">{{cartitem.quantity}}</span></td>
+                      <td>${{cartitem.product.price}}</td>
+                      <td>$<span id="price">{{cartitem.price }}</span></td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+              </table>
+            </div>
+          </div>
+    
+  
+        </div>
+  
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</div>
+
+
+{% endblock %}

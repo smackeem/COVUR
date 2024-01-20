@@ -1,0 +1,142 @@
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>COVUR</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/style.css' %}"
+    />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    {% load bootstrap5 %} {% bootstrap_css %} {% bootstrap_javascript %}
+  </head>
+  <body>
+    <header class="navbar-fixed">
+      <nav class="px-4 blue-grey darken-4 z-depth-5">
+        <div class="nav-wrapper">
+          <ul>
+            <li>
+              <a href="/" class="left brand-logo no_underline"
+                >COVUR<i class="large material-icons right">store</i></a
+              >
+            </li>
+          </ul>
+          <ul class="right">
+            <li>
+              <a class="d-flex no_underline" href="{% url 'cart' %}">
+                <i class="medium material-icons right">shopping_cart</i>
+                {% if cart.num_of_items %}<span
+                  class="align-self-start"
+                  id="num_of_items"
+                  >{{cart.num_of_items}}
+                </span>
+                {% else %} 0 {% endif %}</a
+              >
+            </li>
+            {% if request.user.is_authenticated %}
+            <li>
+              <a class="no_underline" href="{% url 'orders' %}">ORDERS</a>
+            </li>
+            <li>
+              <a class="no_underline" href="{% url 'logout' %}">LOGOUT</a>
+            </li>
+            {% else %}
+            <li>
+              <a class="no_underline" href="{% url 'signup' %}">SIGN UP</a>
+            </li>
+            <li><a class="no_underline" href="{% url 'login' %}">LOGIN</a></li>
+            {% endif %}
+          </ul>
+        </div>
+      </nav>
+      <script>
+        let user = "{{ request.user }}";
+        function getCookie(name) {
+          let cookieValue = null;
+          if (document.cookie && document.cookie !== "") {
+            const cookies = document.cookie.split(";");
+            for (let i = 0; i < cookies.length; i++) {
+              const cookie = cookies[i].trim();
+              if (cookie.substring(0, name.length + 1) === name + "=") {
+                cookieValue = decodeURIComponent(
+                  cookie.substring(name.length + 1)
+                );
+                break;
+              }
+            }
+          }
+          return cookieValue;
+        }
+        const csrftoken = getCookie("csrftoken");
+      </script>
+    </header>
+    {% if messages %} {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show">
+      {{ message|safe }}
+    </div>
+    {% endfor %} {% endif %}
+    <main>
+      {% block content %} {% endblock %}
+      <script src="{% static 'script/script.js' %}"></script>
+    </main>
+
+    <footer class="mt-5 page-footer d-flex flex-column align-items-center blue-grey darken-4 z-depth-5">
+      <div class="container">
+        <div class="row p-3">
+          <div class="col l6 s12">
+            <h5 class="white-text">CUSTOMER SERVICE</h5>
+            <p class="grey-text text-lighten-4">
+              Operating hours are from 9am-9pm EST Monday-Friday and 9am-6pm EST
+              Saturday. Reach out today!
+            </p>
+            <p class="grey-text text-lighten-4">customerservice@covur.com</p>
+            <p class="grey-text text-lighten-4">1-855-404-7474</p>
+
+            <ul>
+              <li>
+                <a class="grey-text text-lighten-3" href="#!"
+                  >Shipping Information</a
+                >
+              </li>
+              <li><a class="grey-text text-lighten-3" href="#!">Returns</a></li>
+              <li>
+                <a class="grey-text text-lighten-3" href="#!">Privacy Policy</a>
+              </li>
+              <li>
+                <a class="grey-text text-lighten-3" href="#!">Help & FAQs</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col l4 offset-l2 s12">
+            <h5 class="white-text">ABOUT</h5>
+            <p>
+              COVUR, a leading men's beauty brand, passionately advocates that
+              skincare is paramount for every man's confidence. Our meticulously
+              crafted products, infused with the detoxifying power of charcoal,
+              from revitalizing moisturizers to invigorating toners, seamlessly
+              blend science and luxury. Experience a grooming journey that not
+              only enhances strength and resilience but also provides the health
+              benefits of charcoal, ensuring timeless appeal. Choose COVUR to
+              effortlessly achieve and sustain healthy, well-nurtured skin that
+              eloquently speaks to your unwavering commitment to self-care.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="footer-copyright d-flex justify-content-center">
+        <div class="container">© COVUR 2024 Copyright</div>
+      </div>
+    </footer>
+  </body>
+</html>

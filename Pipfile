@@ -1,0 +1,18 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+django = "*"
+psycopg2-binary = "*"
+django-on-heroku = "*"
+gunicorn = "*"
+django-bootstrap-v5 = "*"
+stripe = "==5.5.0"
+pillow = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.12"
