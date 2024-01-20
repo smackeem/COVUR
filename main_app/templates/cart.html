@@ -4,11 +4,17 @@
 <div class="mt-5">
     <i></i>
 </div>
-<div class="card mt-5 ">
+<div class="card mt-5 z-depth-4">
     <div class="card-content d-flex justify-content-around align-items-center">
             <span class="h4" >Items: <strong id="num_of_items">{{cart.num_of_items}}</strong></span>
-            <span class="h4">Total: <strong id="cart_total">${{cart.total}}</strong></span>
-            <a href="{% url 'checkoutpage' %}"><span><button class="btn">Checkout</button></span></a>
+           
+            <span class="h4">Total: <strong id="cart_total">${% if cart.total %}{{cart.total}}{% else %}0 {% endif %}</strong></span>
+            
+            {% if cart.num_of_item %}
+            <a href="{% url 'checkoutpage' %}"><span><button class="btn amber darken-2 white-text z-depth-5">Checkout</button></span></a>
+            {% else %}
+            <a class="btn-floating pulse no_underline amber darken-2 pulse z-depth-5" href="/"><i class="material-icons">add</i></a>
+            {% endif %}
         
     </div>
 </div>
@@ -44,9 +50,9 @@
     </div>
 </div>
 {% else %}
-<div class="d-flex justify-content-evenly flex-column align-items-center">
+<div class="mt-5 p-5 d-flex justify-content-evenly flex-column align-items-center">
     <i class="large material-icons right">shopping_cart</i> 
-    <a href="/">START SHOPPING</a>
+    
 </div>
 
 

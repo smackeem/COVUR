@@ -141,5 +141,5 @@ STRIPE_WEBHOOK_SECRET = "http://127.0.0.1:8000/web_hooks/"
 REDIRECT_URL = 'http://127.0.0.1:8000'
 
 
-import django_on_heroku
-django_on_heroku.settings(locals())
+# import django_on_heroku
+# django_on_heroku.settings(locals())

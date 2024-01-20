@@ -53,6 +53,8 @@ class Cart(models.Model):
     def get_absolute_url(self):
         return reverse('details', kwargs={'cart_id': self.id})
 
+    class Meta:
+        ordering = ['-success_date']
         
 
 
@@ -80,22 +82,13 @@ class CartItem(models.Model):
     
     def get_absolute_url(self):
         return reverse('details', kwargs={'cartitem_id': self.id})
- 
-class OrderItem(models.Model):
-    cart = models.ForeignKey(Cart, on_delete = models.CASCADE)
 
-
-class Order(models.Model):
+class Review(models.Model):
     customer = models.ForeignKey(Customer, on_delete = models.CASCADE)
-    product_list = models.ForeignKey(OrderItem, on_delete = models.CASCADE)
-    date = models.DateTimeField()
-    total = models.FloatField()
-    status = models.BooleanField(default=False)
+    product = models.ForeignKey(Product, on_delete = models.CASCADE)
+    stars = models.IntegerField()
+    content = models.TextField(max_length=250)
+    date = models.DateField()
 
-
-
-# class Review(models.Model):
-#     customer = models.ForeignKey(Customer, on_delete = models.CASCADE)
-#     product = models.ForeignKey(Product, on_delete = models.CASCADE)
-#     stars = models.IntegerField()
-#     content = models.TextField(max_length=250)
+    def __str__(self):
+        return f'{self.stars} Stars on {self.date}'

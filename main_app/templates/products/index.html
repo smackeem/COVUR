@@ -3,7 +3,7 @@
 {% load static %}
 
 <div class="parallax-container mt-5">
-    <div class="parallax"><img src="{% static 'product_images/products.jpeg' %}"></div>
+    <div ><img src="https://i.ibb.co/2g6NTqS/310224b9-be8d-45c7-95b6-ebb459815f31.jpg"></div>
   </div>
 <h1 class="mt-5">Catalog</h1>
 
@@ -11,15 +11,15 @@
     <div class="row">
         {% for product in catalog %}
             <div class="col-lg-3 col-md-4 col-sm-6">
-                <div class="card mb-3">
-                    <img class="card-img-top" src="{{product.image.url}}" alt="product">
+                <div class="z-depth-3 card mb-3">
+                    <img class="card-img-top z-depth-2" src="{{product.image.url}}" alt="product">
                     <div class="card-body">
-                        <h5 class="card-title">{{product.name}}</h5>
-                        <p class="card-text">${{product.price}}</p>
+                        <h5 class="card-title ">{{product.name}}</h5>
+                        <p class="card-text">${{product.price}} USD</p>
                     </div>
                     <div class="card-footer d-flex justify-content-around">
-                        <button data-product="{{product.id}}" data-action="add" id="updateItem" type="submit" class="btn btn-primary">ADD TO CART</button>
-                        <a href="{% url 'product_detail' product.id %}" class="btn btn-secondary">VIEW</a>
+                        <button data-product="{{product.id}}" data-action="add" id="updateItem" type="submit" class="btn z-depth-3 white-text amber darken-2">ADD TO CART</button>
+                        <a href="{% url 'product_detail' product.id %}" class="btn z-depth-3 btn-secondary">VIEW</a>
                     </div>
                 </div>
             </div>

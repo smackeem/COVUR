@@ -22,14 +22,14 @@
   </head>
   <body>
     <header class="navbar-fixed">
-      <nav class="px-4">
+      <nav class="px-4 blue-grey darken-4 z-depth-5" >
         <div class="nav-wrapper">
           <ul>
             <li><a href="/" class="left brand-logo no_underline">COVUR<i class="large material-icons right">store</i></a></li>
           </ul>
           <ul class="right">
             <li >
-              <a class="d-flex no_underline" href="{% url 'cart' %}">
+              <a class="d-flex no_underline " href="{% url 'cart' %}">
                 <i class="medium material-icons right">shopping_cart</i> 
                 {% if cart.num_of_items %}<span class="align-self-start" id="num_of_items"
                   >{{cart.num_of_items}}
@@ -79,7 +79,7 @@
       <script src="{% static 'script/script.js' %}"></script>
     </main>
     
-    <footer class="mt-5 page-footer">
+    <!-- <footer class="mt-5 page-footer">
       <div class="container">
         <div class="row p-3">
           <div class="col l6 s12">
@@ -123,6 +123,6 @@
       <div class="footer-copyright">
         <div class="container">© COVUR 2024 Copyright</div>
       </div>
-    </footer>
+    </footer> -->
   </body>
 </html>

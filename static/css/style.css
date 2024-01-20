@@ -11,7 +11,7 @@ body {
   }
   main {
     flex: 1 0 auto;
-    height: 100vh;
+    /* min-height: 100vh; */
   }
   
   footer.page-footer {
@@ -20,6 +20,4 @@ body {
   .no_underline {
     text-decoration: none;
   }
-  a {
-    text-decoration: none;
-  }
+
