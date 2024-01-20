@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+<div class="my-5 container card z-depth-3">
+  <div class="row m-4 ">
+    
+      <div class="col-md-3 d-flex amber-text text-darken-2 justify-content-center flex-column align-items-center">
+        <h1>Delete Product</h1>
+        <i class="large material-icons">announcement</i>
+      </div>
+  
+      <div class="col-md-9 d-flex py-4 flex-column justify-content-between align-items-center">
+        <h4>Are you sure you want to delete <span class="amber-text text-darken-2">{{ object.name }}</span>?</h4>
+        <form action="" method="POST">
+          {% csrf_token %}
+          <input type="submit" value="Yes - Delete!" class="btn blue-grey darken-2 white-text">
+          <a href="{% url 'product_detail' product.id %}" class="h6 no_underline ml-2 amber-text text-darken-2">Cancel</a>
+        </form>
+      </div>
+  </div>
+</div>
+</div>
+{% endblock %}

@@ -6,11 +6,16 @@
       <div class="row m-4 ">
         
           <div class="col-md-3 d-flex amber-text text-darken-2 justify-content-center flex-column align-items-center">
+            {% if object %}
+            <h1>EDIT <span class="blue-grey-text">{{object.name}}</span></h1>
+          {% else %}
             <h2 class="">ADD PRODUCT</h2>
+          {% endif %}
+            
               <i class="large material-icons">queue</i>
           </div>
           <div class="col-md-9 d-flex py-4 flex-column justify-content-between">
-            <form class="" method="POST">
+            <form class="" method="POST" enctype="multipart/form-data">
               {% csrf_token %} {{ form.as_table }}
               <br/>
               <button type="submit" class="btn mt-2 blue-grey darken-4 white-text">ADD</button>

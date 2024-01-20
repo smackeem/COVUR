@@ -31,7 +31,7 @@ class Product(models.Model):
         return self.name
     
     def get_absolute_url(self):
-        return reverse('details', kwargs={'product_id': self.id})
+        return reverse('product_detail', kwargs={'product_id': self.id})
 
     class Meta:
         ordering = ['name']
@@ -55,7 +55,7 @@ class Cart(models.Model):
         return sum([item.quantity for item in items])
     
     def get_absolute_url(self):
-        return reverse('details', kwargs={'cart_id': self.id})
+        return reverse('detail', kwargs={'cart_id': self.id})
 
     class Meta:
         ordering = ['-success_date']
@@ -85,7 +85,7 @@ class CartItem(models.Model):
         return f"{self.quantity} {self.product.name}"
     
     def get_absolute_url(self):
-        return reverse('details', kwargs={'cartitem_id': self.id})
+        return reverse('detail', kwargs={'cartitem_id': self.id})
     
     class Meta:
         ordering = ['-id']

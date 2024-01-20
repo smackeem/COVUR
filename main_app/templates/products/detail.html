@@ -18,8 +18,12 @@
             <blockquote class=" align-self-center col-10 ">{{product.description}}</blockquote>
            
             <button data-product="{{product.id}}" data-action="add" id="updateItem" type="submit" class="btn z-depth-4 amber darken-2 white-text">ADD TO CART</button>
-            
-           
+            {% if request.user.is_authenticated and request.user.is_superuser %}
+            <div class="card-action">
+                <a href="{% url 'products_update' product.id %}">Edit</a>
+                <a href="{% url 'products_delete' product.id %}">Delete</a>
+              </div>
+           {% endif %}
         </div>
     </div>
 </div>

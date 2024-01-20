@@ -3,13 +3,13 @@ from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import login, logout, authenticate
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.forms import AuthenticationForm
 from django.views import View
 from django.conf import settings
 from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .forms import SignUpForm
 from .models import Product, Cart, CartItem, Customer
 
@@ -24,12 +24,23 @@ def catalog(request):
 
 def product_details(request, product_id):
     product = Product.objects.get(id=product_id)
-    return render(request, 'products/details.html', {'product': product, 'user': request.user})
+    return render(request, 'products/detail.html', {'product': product, 'user': request.user})
+
+def is_superuser(request):
+    return request.user.is_authenticated and request.user.is_superuser
 
 class ProductCreate(CreateView):
     model = Product
     fields = '__all__'
-    success_url = '/catalog'
+    success_url = '/'
+
+class ProductUpdate(UpdateView):
+    model = Product
+    fields = '__all__'
+
+class ProductDelete(DeleteView):
+    model = Product
+    success_url = '/'
 
 def signup(request):
     if request.method == 'POST':
@@ -108,15 +119,14 @@ def add_to_cart(request, product_id, action):
             print('quantity', cartItem.quantity)
 
         case 'sub':
+            cartItem.decrease_quantity()
             if(cartItem.quantity <= 0):
                 cartItem.delete()
-            else:
-                cartItem.decrease_quantity()
             print('quantity', cartItem.quantity)
         
         case 'add-to':
             cartItem.increase_quantity()
-            products = Product.objects.all()    
+            products = Product.objects.all()  
             return render(request, 'products/index.html', {'catalog': products})
                 
         case 'del':
