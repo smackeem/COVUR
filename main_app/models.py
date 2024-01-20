@@ -1,6 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.urls import reverse
+from django.core.validators import MaxValueValidator
 
 # Create your models here.
 class Customer(AbstractUser):
@@ -92,7 +93,7 @@ class CartItem(models.Model):
 class Review(models.Model):
     customer = models.ForeignKey(Customer, on_delete = models.CASCADE)
     product = models.ForeignKey(Product, on_delete = models.CASCADE)
-    stars = models.IntegerField()
+    stars = models.PositiveIntegerField(validators=[MaxValueValidator(limit_value=100)])
     content = models.TextField(max_length=250)
     date = models.DateField()
 
