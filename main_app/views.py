@@ -157,8 +157,8 @@ def create_checkout_session(request, cart_id):
     }],
             mode='payment',
             customer_creation = 'always',
-            success_url= settings.REDIRECT_URL + '/success?session_id={CHECKOUT_SESSION_ID}',
-            cancel_url= settings.REDIRECT_URL + '/cart/',
+            success_url= settings.REDIRECT_URL_LIVE + '/success?session_id={CHECKOUT_SESSION_ID}',
+            cancel_url= settings.REDIRECT_URL_LIVE + '/cart/',
             metadata = {'user': user},
             shipping_address_collection = {
                 'allowed_countries': ['US', 'GB', 'CA']
