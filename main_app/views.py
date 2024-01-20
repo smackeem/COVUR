@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.utils.decorators import method_decorator
 from django.contrib.auth.forms import AuthenticationForm
 from django.views import View
 from django.conf import settings
@@ -26,18 +27,24 @@ def product_details(request, product_id):
     product = Product.objects.get(id=product_id)
     return render(request, 'products/detail.html', {'product': product, 'user': request.user})
 
-def is_superuser(request):
-    return request.user.is_authenticated and request.user.is_superuser
+def is_superuser(user):
+    return user.is_authenticated and user.is_superuser
 
+@method_decorator(login_required, name='dispatch')
+@method_decorator(user_passes_test(is_superuser), name='dispatch')
 class ProductCreate(CreateView):
     model = Product
     fields = '__all__'
     success_url = '/'
 
+@method_decorator(login_required, name='dispatch')
+@method_decorator(user_passes_test(is_superuser), name='dispatch')
 class ProductUpdate(UpdateView):
     model = Product
     fields = '__all__'
-
+    
+@method_decorator(login_required, name='dispatch')
+@method_decorator(user_passes_test(is_superuser), name='dispatch')
 class ProductDelete(DeleteView):
     model = Product
     success_url = '/'
