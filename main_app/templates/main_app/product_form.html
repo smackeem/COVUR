@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container">
+    <div class="my-5 container card z-depth-4">
+      <div class="row m-4 ">
+        
+          <div class="col-md-3 d-flex amber-text text-darken-2 justify-content-center flex-column align-items-center">
+            <h2 class="">ADD PRODUCT</h2>
+              <i class="large material-icons">queue</i>
+          </div>
+          <div class="col-md-9 d-flex py-4 flex-column justify-content-between">
+            <form class="" method="POST">
+              {% csrf_token %} {{ form.as_table }}
+              <br/>
+              <button type="submit" class="btn mt-2 blue-grey darken-4 white-text">ADD</button>
+            </form>            
+          </div>
+      </div>
+    </div>
+    </div>
+
+{% endblock %}

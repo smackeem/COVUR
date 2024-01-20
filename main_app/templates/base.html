@@ -45,6 +45,11 @@
               >
             </li>
             {% if request.user.is_authenticated %}
+            {% if request.user.is_superuser %}
+            <li>
+              <a class="no_underline" href="{% url 'products_create' %}">ADD PODUCTS</a>
+            </li>
+            {% endif %}
             <li>
               <a class="no_underline" href="{% url 'orders' %}">ORDERS</a>
             </li>

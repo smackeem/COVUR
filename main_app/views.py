@@ -9,6 +9,7 @@ from django.views import View
 from django.conf import settings
 from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
+from django.views.generic.edit import CreateView
 from .forms import SignUpForm
 from .models import Product, Cart, CartItem, Customer
 
@@ -24,6 +25,11 @@ def catalog(request):
 def product_details(request, product_id):
     product = Product.objects.get(id=product_id)
     return render(request, 'products/details.html', {'product': product, 'user': request.user})
+
+class ProductCreate(CreateView):
+    model = Product
+    fields = '__all__'
+    success_url = '/catalog'
 
 def signup(request):
     if request.method == 'POST':
@@ -172,7 +178,6 @@ def create_checkout_session(request, cart_id):
 def checkoutpage(request):
     return render(request, 'checkout.html', {'user': request.user})
 
-@login_required
 @csrf_exempt 
 def stripe_webhook(request):
     stripe.api_key = settings.STRIPE_SECRET_KEY

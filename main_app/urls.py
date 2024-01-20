@@ -15,6 +15,8 @@ urlpatterns = [
     path('cart/<int:cart_id>/checkout/', views.create_checkout_session, name='checkout'),
     path('success/', views.confirm_payment, name='success'),
     path('web_hooks/', views.stripe_webhook, name='webhooks'),
+    path('products/create/', views.ProductCreate.as_view(), name='products_create'),
+    
     # path('products/<int:products_id>/reviews/create', views.write_review, name='review_create')
 ]
 	
