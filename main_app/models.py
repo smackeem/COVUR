@@ -1,7 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.urls import reverse
-from django.core.validators import MaxValueValidator
+from django.db.models import Avg, Count
 
 # Create your models here.
 class Customer(AbstractUser):
@@ -32,6 +32,14 @@ class Product(models.Model):
     
     def get_absolute_url(self):
         return reverse('product_detail', kwargs={'product_id': self.id})
+    
+    @property
+    def total_reviews(self):
+        return self.review_set.count()
+
+    @property
+    def average_stars(self):
+        return self.review_set.aggregate(Avg('stars'))['stars__avg'] or 0
 
     class Meta:
         ordering = ['name']
@@ -97,7 +105,7 @@ class CartItem(models.Model):
 class Review(models.Model):
     customer = models.ForeignKey(Customer, on_delete = models.CASCADE)
     product = models.ForeignKey(Product, on_delete = models.CASCADE)
-    stars = models.PositiveIntegerField(validators=[MaxValueValidator(limit_value=5)], default=5)
+    stars = models.PositiveIntegerField(default=5)
     content = models.TextField(max_length=250)
     date = models.DateTimeField()
 

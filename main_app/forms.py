@@ -26,3 +26,15 @@ class ReviewForm(ModelForm):
         model = Review
         fields = ['stars', 'content']
     
+    STARS_CHOICES = [
+        (5, '5 stars'),
+        (4, '4 stars'),
+        (3, '3 stars'),
+        (2, '2 stars'),
+        (1, '1 star'),
+    ]
+
+    stars = forms.ChoiceField(
+        choices=STARS_CHOICES,
+        # widget=forms.Select(attrs={'class': 'form-control'})
+    )
