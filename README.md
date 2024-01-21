@@ -2,7 +2,7 @@
 
 <br />
 <div align="center">
-  <h1>COVUR: E-Store</h1>
+  <h1><a href="https://covurstore-aef113cfb56b.herokuapp.com/">COVUR: E-Store</a></h1>
 </div>
 
 <!-- TABLE OF CONTENTS -->
@@ -22,7 +22,7 @@
 
 
 ## About the Project
-Welcome to the COVUR E-Store Application, a sophisticated and feature-rich platform designed to provide a seamless shopping experience for users seeking premium men's skincare products. This project leverages Django by incorporating essential features and integrations to deliver a robust E-Commerce solution.
+Welcome to the <a href="https://covurstore-aef113cfb56b.herokuapp.com/">COVUR E-Store Application</a>, a sophisticated and feature-rich platform designed to provide a seamless shopping experience for users seeking premium men's skincare products. This project leverages Django by incorporating essential features and integrations to deliver a robust E-Commerce solution.
 
 
 ## Screenshots
@@ -66,27 +66,21 @@ Welcome to the COVUR E-Store Application, a sophisticated and feature-rich platf
 
 
 ## Getting Started
-* Application: Come spend some Sh-money at my Store: <a href="https://covurstore-aef113cfb56b.herokuapp.com/"><h4>COVUR</h4></a>
-
-* Planning Materials: <a href='https://trello.com/b/0yivI40t/covur'>Covur's Trello Board</a>
+<h4>Application: <a href="https://covurstore-aef113cfb56b.herokuapp.com/">COVUR E-Store</a></h4>
+<h4>Planning Materials: <a href='https://trello.com/b/0yivI40t/covur'>Covur's Trello Board</a></h4>
 
 <h4>Clone the Repository</h4>
-* <img width="606" alt="Screenshot 2024-01-21 at 11 23 11 AM" src="https://github.com/smackeem/COVUR/assets/43871798/fb2d4bd7-74a9-44bc-aff6-a1aa190634d1">
-
+<img width="606" alt="Screenshot 2024-01-21 at 11 23 11 AM" src="https://github.com/smackeem/COVUR/assets/43871798/fb2d4bd7-74a9-44bc-aff6-a1aa190634d1">
 <h4>Install Dependencies with Pipenv</h4>
-* <img width="602" alt="Screenshot 2024-01-21 at 11 34 33 AM" src="https://github.com/smackeem/COVUR/assets/43871798/456ffbfe-68d0-4b4f-af27-42b45110da85">
-
+<img width="602" alt="Screenshot 2024-01-21 at 11 34 33 AM" src="https://github.com/smackeem/COVUR/assets/43871798/456ffbfe-68d0-4b4f-af27-42b45110da85">
 <h4>Activate the Virtual Environment</h4>
-* <img width="593" alt="Screenshot 2024-01-21 at 11 35 01 AM" src="https://github.com/smackeem/COVUR/assets/43871798/12402ba9-f423-44a5-a09e-a51a89dbcbdb">
-
+<img width="593" alt="Screenshot 2024-01-21 at 11 35 01 AM" src="https://github.com/smackeem/COVUR/assets/43871798/12402ba9-f423-44a5-a09e-a51a89dbcbdb">
 <h4>Apply Database Migrations</h4>
-* <img width="602" alt="Screenshot 2024-01-21 at 11 32 03 AM" src="https://github.com/smackeem/COVUR/assets/43871798/a4e1beb3-be01-4f85-82d9-817983f9babc">
-
+<img width="602" alt="Screenshot 2024-01-21 at 11 32 03 AM" src="https://github.com/smackeem/COVUR/assets/43871798/a4e1beb3-be01-4f85-82d9-817983f9babc">
 <h4>Create a Superuser</h4>
-* <img width="599" alt="Screenshot 2024-01-21 at 11 32 15 AM" src="https://github.com/smackeem/COVUR/assets/43871798/36adfdac-f5d9-472c-8aef-76001f2f68e0">
-
+<img width="599" alt="Screenshot 2024-01-21 at 11 32 15 AM" src="https://github.com/smackeem/COVUR/assets/43871798/36adfdac-f5d9-472c-8aef-76001f2f68e0">
 <h4>Run Development Server</h4>
-* <img width="603" alt="Screenshot 2024-01-21 at 11 33 27 AM" src="https://github.com/smackeem/COVUR/assets/43871798/5cffc30f-d1d9-4b86-954a-988784c97c79">
+<img width="603" alt="Screenshot 2024-01-21 at 11 33 27 AM" src="https://github.com/smackeem/COVUR/assets/43871798/5cffc30f-d1d9-4b86-954a-988784c97c79">
 
 
 ## Key Features
