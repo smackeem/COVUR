@@ -2,7 +2,7 @@
 {% block content %}
 <div class="container">
 <div class="mt-5 d-flex align-items-center black-text gap-2">
-    <a href="{% url 'catalog' %}" class="no_underline btn-floating pulse amber darken-2 "><i class="medium material-icons">arrow_back</i></a> <span class="h5">CATALOG</span>
+    <a href="{% url 'catalog' %}" class="no_underline btn-floating pulse amber darken-4 "><i class="medium material-icons">arrow_back</i></a> <span class="h5">CATALOG</span>
 </div>
 <div class="card mt-5 z-depth-4">
     <div class="card-content d-flex justify-content-around align-items-center">
@@ -11,9 +11,9 @@
             <span class="h4">Total: <strong id="cart_total">${% if cart.total %}{{cart.total}}{% else %}0 {% endif %}</strong></span>
             
             {% if cart.num_of_items %}
-            <button type="button" data-toggle="modal" data-target="#myModal" class="btn amber darken-2 white-text z-depth-5">Checkout</button>
+            <button type="button" data-toggle="modal" data-target="#myModal" class="btn amber darken-4 white-text z-depth-5">Checkout</button>
             {% else %}
-            <a class="btn-floating pulse no_underline amber darken-2 pulse z-depth-5" href="/"><i class="material-icons">add</i></a>
+            <a class="btn-floating pulse no_underline amber darken-4 pulse z-depth-5" href="/"><i class="material-icons">add</i></a>
             {% endif %}
         
     </div>
