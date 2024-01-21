@@ -27,17 +27,16 @@ Welcome to the COVUR E-Store Application, a sophisticated and feature-rich platf
 
 ## Screenshots
 
+![Screenshot 2024-01-21 at 11 57 39 AM](https://github.com/smackeem/COVUR/assets/43871798/02baa35e-c44a-4f2c-89bb-76f1dfbfc179)
 ![Screenshot 2024-01-21 at 12 03 04 PM](https://github.com/smackeem/COVUR/assets/43871798/1e907ae1-143d-49a5-aa8d-fb5b5676941d)
 ![Screenshot 2024-01-21 at 11 50 59 AM](https://github.com/smackeem/COVUR/assets/43871798/f039ae41-2630-48d7-837c-5db9766335b6)
 ![Screenshot 2024-01-21 at 11 54 43 AM](https://github.com/smackeem/COVUR/assets/43871798/5b3f4f70-36e5-442d-bc9d-ab08ddcb97f9)
-![Screenshot 2024-01-21 at 11 58 29 AM](https://github.com/smackeem/COVUR/assets/43871798/bcb9124d-195e-4d4a-8b52-8bfa9a2b106c)
-![Screenshot 2024-01-21 at 11 59 02 AM](https://github.com/smackeem/COVUR/assets/43871798/8290d852-da2a-4949-8c62-4e49e7c56f37)
 ![Screenshot 2024-01-21 at 11 55 57 AM](https://github.com/smackeem/COVUR/assets/43871798/cc41711b-2772-4ee4-a833-1386d50ed267)
 ![Screenshot 2024-01-21 at 11 56 29 AM](https://github.com/smackeem/COVUR/assets/43871798/42cac0a3-d7c7-48b8-9b31-20c9dfa23441)
 ![Screenshot 2024-01-21 at 12 01 04 PM](https://github.com/smackeem/COVUR/assets/43871798/54333b56-ebce-4c87-9d91-ef79cf08d73d)
 ![Screenshot 2024-01-21 at 12 01 29 PM](https://github.com/smackeem/COVUR/assets/43871798/6b910ad8-20ae-410b-b059-fdd94ad9cedd)
 ![Screenshot 2024-01-21 at 12 01 52 PM](https://github.com/smackeem/COVUR/assets/43871798/a3463339-899b-4fe3-941d-306c13a387a1)
-![Screenshot 2024-01-21 at 11 57 39 AM](https://github.com/smackeem/COVUR/assets/43871798/02baa35e-c44a-4f2c-89bb-76f1dfbfc179)
+![Screenshot 2024-01-21 at 11 59 02 AM](https://github.com/smackeem/COVUR/assets/43871798/8290d852-da2a-4949-8c62-4e49e7c56f37)
 ![Screenshot 2024-01-21 at 11 58 13 AM](https://github.com/smackeem/COVUR/assets/43871798/c0e0184f-fe86-4ebf-923d-7d209a3c21ef)
 ![Screenshot 2024-01-21 at 11 59 28 AM](https://github.com/smackeem/COVUR/assets/43871798/e184f695-0cd7-4ea4-8d76-326487e26a30)
 ![Screenshot 2024-01-21 at 11 59 53 AM](https://github.com/smackeem/COVUR/assets/43871798/7d378076-d921-4f88-b30d-ea2717ac1a32)
