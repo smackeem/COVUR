@@ -37,7 +37,7 @@ Welcome to the <a href="https://covurstore-aef113cfb56b.herokuapp.com/">COVUR E-
 ![Screenshot 2024-01-21 at 12 01 29 PM](https://github.com/smackeem/COVUR/assets/43871798/6b910ad8-20ae-410b-b059-fdd94ad9cedd)
 ![Screenshot 2024-01-21 at 12 01 52 PM](https://github.com/smackeem/COVUR/assets/43871798/a3463339-899b-4fe3-941d-306c13a387a1)
 ![Screenshot 2024-01-21 at 11 59 02 AM](https://github.com/smackeem/COVUR/assets/43871798/8290d852-da2a-4949-8c62-4e49e7c56f37)
-![Screenshot 2024-01-21 at 11 58 13 AM](https://github.com/smackeem/COVUR/assets/43871798/c0e0184f-fe86-4ebf-923d-7d209a3c21ef)
+![Screenshot 2024-01-21 at 11 58 29 AM](https://github.com/smackeem/COVUR/assets/43871798/bf8cfad9-17f8-46ac-b2fe-1488c55a0650)
 ![Screenshot 2024-01-21 at 11 59 28 AM](https://github.com/smackeem/COVUR/assets/43871798/e184f695-0cd7-4ea4-8d76-326487e26a30)
 ![Screenshot 2024-01-21 at 11 59 53 AM](https://github.com/smackeem/COVUR/assets/43871798/7d378076-d921-4f88-b30d-ea2717ac1a32)
 
