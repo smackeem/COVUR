@@ -97,7 +97,7 @@ class CartItem(models.Model):
 class Review(models.Model):
     customer = models.ForeignKey(Customer, on_delete = models.CASCADE)
     product = models.ForeignKey(Product, on_delete = models.CASCADE)
-    stars = models.PositiveIntegerField(validators=[MaxValueValidator(limit_value=100)])
+    stars = models.PositiveIntegerField(validators=[MaxValueValidator(limit_value=5)], default=5)
     content = models.TextField(max_length=250)
     date = models.DateTimeField()
 

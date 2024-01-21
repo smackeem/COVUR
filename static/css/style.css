@@ -61,3 +61,7 @@ body.modal-open {
   background: rgba(0, 0, 0, 0.5);
   height: 100vh; 
 }
+
+.errorlist{
+  color: #ff6f00;
+}

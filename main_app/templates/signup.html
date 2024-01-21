@@ -10,7 +10,7 @@
       </div>
       <div class="col-md-9 d-flex py-4 flex-column justify-content-between">
         <form class="" method="POST">
-          {% csrf_token %} {{ form.as_table }}
+          {% csrf_token %} {{ form.as_p }}
           <br/>
           <button type="submit" class="btn mt-2 blue-grey darken-4 white-text">Sign up</button>
         </form>

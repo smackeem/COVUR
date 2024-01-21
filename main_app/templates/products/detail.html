@@ -54,7 +54,7 @@
         From:<span class="title amber-text text-darken-3"> {{review.customer.username}}</span>  <span class="mt-1"> on {{review.date}}</span>
           <blockquote class="mt-3">{{review.content}}</blockquote> 
         {% if review.customer == request.user %}
-        <a href="{% url 'review_delete' review.customer.id review.id %}" class="secondary-content btn-floating pulse red"><i class="material-icons">clear</i></a>
+        <a href="{% url 'review_delete' fk=review.product.id pk=review.id %}" class="secondary-content btn-floating pulse red"><i class="material-icons">clear</i></a>
             {% endif %}
         </li>
     </ul>

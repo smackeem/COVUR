@@ -243,4 +243,6 @@ def remove_review(request, fk, pk):
     review = Review.objects.get(id=pk)
     if review:
         review.delete()
-    return redirect('product_detail', product_id=fk)
+    else:
+        messages.error("The review does not exist!")
+    return redirect('product_detail', fk)
