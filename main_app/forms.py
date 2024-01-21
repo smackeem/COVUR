@@ -36,5 +36,4 @@ class ReviewForm(ModelForm):
 
     stars = forms.ChoiceField(
         choices=STARS_CHOICES,
-        # widget=forms.Select(attrs={'class': 'form-control'})
     )
