@@ -8,21 +8,37 @@
           <div class="col-md-3 d-flex amber-text text-darken-4 justify-content-center flex-column align-items-center">
             {% if object %}
             <h1>EDIT <span class="blue-grey-text">{{object.name}}</span></h1>
+            <i class="large material-icons">edit</i>
           {% else %}
-            <h2 class="">ADD PRODUCT</h2>
+            <h2 class="">ADD <span class="blue-grey-text">PRODUCT</span></h2>
+            <i class="large material-icons">queue</i>
           {% endif %}
             
-              <i class="large material-icons">queue</i>
           </div>
           <div class="col-md-9 d-flex py-4 flex-column justify-content-between">
             <form class="" method="POST" enctype="multipart/form-data">
               {% csrf_token %} {{ form.as_table }}
               <br/>
-              <button type="submit" class="btn mt-2 blue-grey darken-4 white-text">ADD</button>
+              {% if object %}
+              <button type="submit" class="btn mt-4 amber darken-4 white-text">UPDATE</button>
+
+              {% else %}
+              <button type="submit" class="btn mt-4 amber darken-4 white-text">ADD</button>
+              {% endif %}
             </form>            
           </div>
       </div>
     </div>
     </div>
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    
+    <script>
+        let textareas = document.querySelectorAll('textarea');
+    
+        textareas.forEach(function(textarea) {
+            textarea.classList.add('materialize-textarea');
+        })
+    
+    </script>
 {% endblock %}
