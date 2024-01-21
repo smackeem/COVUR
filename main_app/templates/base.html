@@ -36,12 +36,12 @@
             <li>
               <a class="d-flex no_underline" style="text-decoration: none !important; color: inherit !important;" href="{% url 'cart' %}">
                 <i class="medium material-icons right">shopping_cart</i>
-                {% if cart.num_of_items %}<span
+                <span
                   class="align-self-start"
-                  id="num_of_items"
+                  id="num_of_items" value="{{cart.num_of_items}}"
                   >{{cart.num_of_items}}
                 </span>
-                {% else %} 0 {% endif %}</a
+                </a
               >
             </li>
             {% if request.user.is_authenticated %}

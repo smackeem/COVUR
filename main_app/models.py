@@ -52,7 +52,11 @@ class Cart(models.Model):
     @property
     def num_of_items(self):
         items = self.cartitems.all()
-        return sum([item.quantity for item in items])
+        if items:
+            return sum([item.quantity for item in items])
+        else:
+            return 0
+            
     
     def get_absolute_url(self):
         return reverse('detail', kwargs={'cart_id': self.id})

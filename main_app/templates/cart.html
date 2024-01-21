@@ -6,9 +6,9 @@
 </div>
 <div class="card mt-5 z-depth-4">
     <div class="card-content d-flex justify-content-around align-items-center">
-            <span class="h4" >Items: <strong id="num_of_items">{{cart.num_of_items}}</strong></span>
+            <span class="h4" >Items: <strong id="num_of_items" value="{{cart.num_of_items}}">{{cart.num_of_items}}</strong></span>
            
-            <span class="h4">Total: <strong id="cart_total">${% if cart.total %}{{cart.total}}{% else %}0 {% endif %}</strong></span>
+            <span class="h4">Total: $<strong id="cart_total" value="{{cart.total}}">{% if cart.total %}{{cart.total}}{% else %}0 {% endif %}</strong></span>
             
             {% if cart.num_of_items %}
             <button type="button" data-toggle="modal" data-target="#myModal" class="btn amber darken-4 white-text z-depth-5">Checkout</button>
@@ -25,8 +25,8 @@
             <thead>
                 <th></th>
                 <th>Product</th>
-                <th>Quantity</th>
                 <th>Unit Price</th>
+                <th>Quantity</th>
                 <th>Price</th>
             </thead>
             <tbody class="collection ">
@@ -36,11 +36,13 @@
                     <td>
                         {{cartitem.product.name}}
                     </td>
-                    <td><a href="{% url 'add' product_id=cartitem.product.id action='sub' %}" id="updateItem" data-product="{{cartitem.product.id}}" data-action="sub"><i class="tiny material-icons ">remove_circle_outline</i></a> 
-                        <span id="num_of_item">{{cartitem.quantity}}</span> 
-                        <a href="{% url 'add' product_id=cartitem.product.id action='add' %}" data-product="{{cartitem.product.id}}" data-action="add" id="updateItem"><i class="tiny material-icons ">add_circle_outline</i></a>
-                    </td>
                     <td>${{cartitem.product.price}}</td>
+                    <td><a id="updateItem" data-product="{{cartitem.product.id}}" data-action="sub"><i class="tiny material-icons ">remove_circle_outline</i></a> 
+                    <!-- <a href="{ url 'add' product_id=cartitem.product.id action='sub' %}" id="updateItem" data-product="{{cartitem.product.id}}" data-action="sub"><i class="tiny material-icons ">remove_circle_outline</i></a>  -->
+                        <span id="num_of_item">{{cartitem.quantity}}</span> 
+                        <a data-product="{{cartitem.product.id}}" data-action="add" id="updateItem"><i class="tiny material-icons ">add_circle_outline</i></a>
+                        <!-- <a href="{ url 'add' product_id=cartitem.product.id action='add' %}" data-product="{{cartitem.product.id}}" data-action="add" id="updateItem"><i class="tiny material-icons ">add_circle_outline</i></a> -->
+                    </td>
                     <td>$<span id="price">{{cartitem.price }}</span></td>
                     <td><a href="#" data-product="{{cartitem.product.id}}" data-action="del" id="updateItem" id="remove"><i class="tiny material-icons">clear</i></a></td>
                 </tr>

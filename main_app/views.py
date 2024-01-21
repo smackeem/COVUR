@@ -71,12 +71,12 @@ def login_view(request):
             
             try:
                 session_cart = Cart.objects.get(session_id = request.session['nonuser'], completed=False)
-                if Cart.objects.filter(customer=request.user, completed=False).exists():
-                    session_cart.customer = None
-                    session_cart.save()
-                else:
-                    session_cart.customer = request.user 
-                    session_cart.save()
+                user_cart = Cart.objects.filter(customer=request.user, completed=False)
+                if user_cart.exists():
+                    user_cart.delete()
+ 
+                session_cart.customer = request.user 
+                session_cart.save()
             except:
                 pass
             return redirect('catalog')
@@ -106,10 +106,12 @@ def order_details(request, order_id):
         order = Cart.objects.get(stripe_checkout_id= order_id)
     return render(request, 'orders/details.html', {'order': order, 'user': request.user})
 
-def add_to_cart(request, product_id, action):
+# def add_to_cart(request, product_id, action):
+def add_to_cart(request):
+    data = json.loads(request.body)
+    product_id = data['product']
+    action = data['action']
     product = Product.objects.get(id=product_id)
-    print(request)
-    
     if request.user.is_authenticated:
         cart, created = Cart.objects.get_or_create(customer=request.user, completed=False)
     else:
@@ -135,11 +137,13 @@ def add_to_cart(request, product_id, action):
         case 'add-to':
             cartItem.increase_quantity()
             products = Product.objects.all()  
-            return render(request, 'products/index.html', {'catalog': products})
+            # return render(request, 'products/index.html', {'catalog': products})
                 
         case 'del':
             cartItem.delete()
-    return render(request, 'cart.html')
+    
+    return JsonResponse({'items': cart.num_of_items, 'page': 'cart'}, safe=False)
+    # return render(request, 'cart.html')
 
 @login_required
 def confirm_payment(request):
@@ -223,18 +227,18 @@ def stripe_webhook(request):
 
     return HttpResponse(status=200)
 
+@login_required
 def add_review(request, product_id):
     form = ReviewForm(request.POST)
     if form.is_valid():
         new_review = form.save(commit=False)
-        print(new_review)
         new_review.product_id = product_id
-        print(request.user.id)
         new_review.customer_id = request.user.id
         new_review.date = timezone.now()
         new_review.save()
     return redirect('product_detail', product_id=product_id)
 
+@login_required
 def remove_review(request, fk, pk):
     review = Review.objects.get(id=pk)
     if review:

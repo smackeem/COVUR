@@ -14,7 +14,7 @@
                 <span class="title h3">{{item.product.name}}</span>
                 <p>Quantity: {{item.quantity}} <br>
                 Price: ${{item.price}}</p>
-                <a href="#" class="secondary-content">leave review</a>
+                <a href="{% url 'review_create' item.product.id %}" class="secondary-content no_underline">Leave Review</a>
             </li>
             {% endfor %}
             
