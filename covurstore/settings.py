@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+from decouple import config, Csv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,12 +21,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-^*2aog%8)m!-@*g34o_*qwgw*3sue6c%a$f)!2g)*r7-_h5xvv'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
-ALLOWED_HOSTS = []
+DEBUG = config('DEBUG', default=False, cast=bool)
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='', cast=Csv())
+
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'
 
 # Custom User
@@ -78,13 +80,22 @@ WSGI_APPLICATION = 'covurstore.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'covur',
+#     }
+# }
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'covur',
+        'NAME': config('DB_NAME', default='covur'),
+        'USER': config('DB_USER', default=''),
+        'PASSWORD': config('DB_PASSWORD', default=''),
+        'HOST': config('DB_HOST', default='localhost'),
+        'PORT': config('DB_PORT', default='5432'),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -134,13 +145,12 @@ MEDIA_ROOT = BASE_DIR/"media"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-STRIPE_PUBLIC_KEY = "pk_test_51OYwERCVfszziAasrqHuKcAz0fXjy7MlGQ0HoAQoKdrG3ySBPgyfGFWXr0L5mWx1SMhSqslOLdoVi3epCfwViY6F00NC3Snt4x"
-STRIPE_SECRET_KEY = "sk_test_51OYwERCVfszziAas4QOrypXLShGI9RiJUXDiONNmvEarEP3QP1yqJffYpTMKUhCF8snGpbR6j0Ltzt2J0TQLmuxL00elrJGkKN"
-STRIPE_WEBHOOK_SECRET = "http://127.0.0.1:8000/web_hooks/"
+STRIPE_PUBLIC_KEY = config('STRIPE_PUBLIC_KEY')
+STRIPE_SECRET_KEY = config('STRIPE_SECRET_KEY')
+STRIPE_WEBHOOK_SECRET = config('STRIPE_WEBHOOK_SECRET')
 
-REDIRECT_URL = 'http://127.0.0.1:8000'
-REDIRECT_URL_LIVE = 'https://covurstore-aef113cfb56b.herokuapp.com'
-
+REDIRECT_URL = config('REDIRECT_URL', default='http://127.0.0.1:8000')
+REDIRECT_URL_LIVE = config('REDIRECT_URL_LIVE', default='https://covurstore-aef113cfb56b.herokuapp.com')
 
 import django_on_heroku
 django_on_heroku.settings(locals())

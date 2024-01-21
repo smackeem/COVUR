@@ -11,6 +11,7 @@ gunicorn = "*"
 django-bootstrap-v5 = "*"
 stripe = "==5.5.0"
 pillow = "*"
+python-decouple = "*"
 
 [dev-packages]
 
