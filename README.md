@@ -13,9 +13,9 @@
         <li><a href="#screenshots">Screenshots</a></li>
         <li><a href="#technologies-used">Technologies Used</a></li>
         <li><a href="#getting-started">Getting Started</a></li>
-        <li><a href="#technical-features-using-django">Technical Features Using Django</a></li>
         <li><a href="#key-features">Key Features</a></li>
         <li><a href="#next-steps-and-future-enhancements">Next Steps and Future Enhancements</a></li>
+        <li><a href="#acknowledgements">Acknowledgements</a></li>
         <li><a href="#contact">Contact</a></li>
     </ul>
 </details>
@@ -27,27 +27,33 @@ Welcome to the COVUR E-Store Application, a sophisticated and feature-rich platf
 
 ## Screenshots
 
+![Screenshot 2024-01-21 at 12 03 04 PM](https://github.com/smackeem/COVUR/assets/43871798/1e907ae1-143d-49a5-aa8d-fb5b5676941d)
 ![Screenshot 2024-01-21 at 11 50 59 AM](https://github.com/smackeem/COVUR/assets/43871798/f039ae41-2630-48d7-837c-5db9766335b6)
-![Screenshot 2024-01-21 at 11 52 09 AM](https://github.com/smackeem/COVUR/assets/43871798/829949f9-6536-4a3a-91ed-44adbd0c9121)
 ![Screenshot 2024-01-21 at 11 54 43 AM](https://github.com/smackeem/COVUR/assets/43871798/5b3f4f70-36e5-442d-bc9d-ab08ddcb97f9)
-![Screenshot 2024-01-21 at 11 56 55 AM](https://github.com/smackeem/COVUR/assets/43871798/dc9d998a-ac70-4158-99ef-d3e4a79885cb)
 ![Screenshot 2024-01-21 at 11 58 29 AM](https://github.com/smackeem/COVUR/assets/43871798/bcb9124d-195e-4d4a-8b52-8bfa9a2b106c)
 ![Screenshot 2024-01-21 at 11 59 02 AM](https://github.com/smackeem/COVUR/assets/43871798/8290d852-da2a-4949-8c62-4e49e7c56f37)
 ![Screenshot 2024-01-21 at 11 55 57 AM](https://github.com/smackeem/COVUR/assets/43871798/cc41711b-2772-4ee4-a833-1386d50ed267)
 ![Screenshot 2024-01-21 at 11 56 29 AM](https://github.com/smackeem/COVUR/assets/43871798/42cac0a3-d7c7-48b8-9b31-20c9dfa23441)
+![Screenshot 2024-01-21 at 12 01 04 PM](https://github.com/smackeem/COVUR/assets/43871798/54333b56-ebce-4c87-9d91-ef79cf08d73d)
+![Screenshot 2024-01-21 at 12 01 29 PM](https://github.com/smackeem/COVUR/assets/43871798/6b910ad8-20ae-410b-b059-fdd94ad9cedd)
+![Screenshot 2024-01-21 at 12 01 52 PM](https://github.com/smackeem/COVUR/assets/43871798/a3463339-899b-4fe3-941d-306c13a387a1)
 ![Screenshot 2024-01-21 at 11 57 39 AM](https://github.com/smackeem/COVUR/assets/43871798/02baa35e-c44a-4f2c-89bb-76f1dfbfc179)
 ![Screenshot 2024-01-21 at 11 58 13 AM](https://github.com/smackeem/COVUR/assets/43871798/c0e0184f-fe86-4ebf-923d-7d209a3c21ef)
 ![Screenshot 2024-01-21 at 11 59 28 AM](https://github.com/smackeem/COVUR/assets/43871798/e184f695-0cd7-4ea4-8d76-326487e26a30)
 ![Screenshot 2024-01-21 at 11 59 53 AM](https://github.com/smackeem/COVUR/assets/43871798/7d378076-d921-4f88-b30d-ea2717ac1a32)
-![Screenshot 2024-01-21 at 12 00 13 PM](https://github.com/smackeem/COVUR/assets/43871798/af309feb-cd06-481d-a187-a3e915efe0a1)
-![Screenshot 2024-01-21 at 12 00 27 PM](https://github.com/smackeem/COVUR/assets/43871798/685fec21-c190-47b7-833b-85a7014becdf)
-![Screenshot 2024-01-21 at 12 01 04 PM](https://github.com/smackeem/COVUR/assets/43871798/54333b56-ebce-4c87-9d91-ef79cf08d73d)
-![Screenshot 2024-01-21 at 12 01 29 PM](https://github.com/smackeem/COVUR/assets/43871798/6b910ad8-20ae-410b-b059-fdd94ad9cedd)
-![Screenshot 2024-01-21 at 12 01 52 PM](https://github.com/smackeem/COVUR/assets/43871798/a3463339-899b-4fe3-941d-306c13a387a1)
-![Screenshot 2024-01-21 at 12 03 04 PM](https://github.com/smackeem/COVUR/assets/43871798/1e907ae1-143d-49a5-aa8d-fb5b5676941d)
 
 
 ## Technologies Used
+1. Models and Database: Utilizes Django models to define the database structure, including entities such as Customer, Product, Cart, CartItem and Review.
+
+2. CRUD Operations: Implements full CRUD (Create, Read, Update, Delete) functionality for key entities, enabling efficient management of products, orders, and reviews.
+
+3. User Authentication & Security: Leverages Django's built-in authentication system for user registration, login, and permissions.
+
+4. Admin Panel: Integrates Django Admin for straightforward management of application data, including product catalog and orders.
+
+5. Payment Processing: Integrates with the Stripe API to securely handle credit/debit card transactions during the checkout process.
+
 ![Django](https://img.shields.io/badge/django-%23092E20.svg?style=for-the-badge&logo=django&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
@@ -82,18 +88,6 @@ Welcome to the COVUR E-Store Application, a sophisticated and feature-rich platf
 
 <h4>Run Development Server</h4>
 * <img width="603" alt="Screenshot 2024-01-21 at 11 33 27 AM" src="https://github.com/smackeem/COVUR/assets/43871798/5cffc30f-d1d9-4b86-954a-988784c97c79">
-
-
-## Technical Features Using Django
-1. Models and Database: Utilizes Django models to define the database structure, including entities such as Customer, Product, Cart, CartItem and Review.
-
-2. CRUD Operations: Implements full CRUD (Create, Read, Update, Delete) functionality for key entities, enabling efficient management of products, orders, and reviews.
-
-3. User Authentication & Security: Leverages Django's built-in authentication system for user registration, login, and permissions.
-
-4. Admin Panel: Integrates Django Admin for straightforward management of application data, including product catalog and orders.
-
-5. Payment Processing: Integrates with the Stripe API to securely handle credit/debit card transactions during the checkout process.
 
 
 ## Key Features
@@ -158,6 +152,10 @@ Welcome to the COVUR E-Store Application, a sophisticated and feature-rich platf
 6. Provide personalized product recommendations based on customer's purchase history.
 7. Integrate a chatbot on the web application to provide support to customers.
 8. Send Email Notifications to customers for upcoming promotions or sales.
+
+
+## Acknowledgements
+This project relies on the <a href="https://stripe.com/docs/development/get-started">STRIPE API</a> for secure payments.
 
 
 ## Contact
