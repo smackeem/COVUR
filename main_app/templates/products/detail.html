@@ -5,27 +5,39 @@
 <div class="in-app-nav">
     <a href="{% url 'catalog' %}">Home</a> > <span>{{product.name}}</span>
   </div>
+  <h1 class="text-center ">{{product.name}}</h1> 
 <div class="my-5 container card z-depth-4">
+    
     <div class="row my-3 ">
         <div class="col-md-4">
             <img class="img-fluid materialboxed img-thumbnail z-depth-2" src="{{product.image.url}}" alt="product">
         </div>
         <div class="col-md-8 d-flex flex-column justify-content-between">
-            <div class="d-flex justify-content-between">
-                <span class="text-left h2">{{product.name}}</span> 
+            <div class="d-flex justify-content-end">
+                
                 <span class="text-right h3">$ {{product.price}} USD</span>
             </div>
-            <div class="d-flex justify-content-center align-items-start">
-                <blockquote class=" align-self-center col-5 "><span class="h5" >Product Description:</span> <br><br>{{product.description}}</blockquote>
-                <blockquote class=" align-self-center col-5 "><span class="h5">Ingredients:</span> <br><br>{{product.ingredients}}</blockquote>
+            <div class="d-flex flex-column z-depth-1">
+                <blockquote class="my-2 col-10"><span class="h5 " >Product Description:</span> <br><br>{{product.description}}</blockquote>
+                <blockquote class="  my-2"><span class="h5">Ingredients:</span> <br><br>{{product.ingredients}}</blockquote>
             </div>
             
-           
-            <button data-product="{{product.id}}" data-action="add" id="updateItem" type="submit" class="btn z-depth-4 amber darken-2 white-text">ADD TO CART</button>
-            {% if request.user.is_authenticated and request.user.is_superuser %}
-            <div class="card-action">
-                <a href="{% url 'products_update' product.id %}">Edit</a>
-                <a href="{% url 'products_delete' product.id %}">Delete</a>
+           <div>
+
+        </div>
+        
+        <div class="card-action d-flex justify-content-center">
+                <button data-product="{{product.id}}" data-action="add" id="updateItem" type="submit" class="btn z-depth-4 amber darken-4 white-text">ADD TO CART</button>
+                
+              </div>
+              {% if request.user.is_authenticated and request.user.is_superuser %}
+              <div class="d-flex justify-content-center gap-4">
+                  <a class="btn-floating pulse red" href="{% url 'products_update' product.id %}"><i class="material-icons">edit</i></a>
+
+                  <a class="btn-floating pulse red " href="{% url 'products_delete' product.id %}"><i class="material-icons">close</i></a>
+              </div>
+              <div>
+
               </div>
            {% endif %}
         </div>
@@ -40,9 +52,9 @@
         <li class="collection-item avatar">
         <img src="{% static 'product_images/user.png' %}" alt="" class="circle">
         From:<span class="title amber-text text-darken-3"> {{review.customer.username}}</span>  <span class="mt-1"> on {{review.date}}</span>
-          <blockquote class="mt-2">{{review.content}}</blockquote> 
+          <blockquote class="mt-3">{{review.content}}</blockquote> 
         {% if review.customer == request.user %}
-        <a href="{% url 'review_delete' review.customer.id review.id %}" class="secondary-content"><i class="material-icons">clear</i></a>
+        <a href="{% url 'review_delete' review.customer.id review.id %}" class="secondary-content btn-floating pulse red"><i class="material-icons">clear</i></a>
             {% endif %}
         </li>
     </ul>
@@ -57,7 +69,7 @@
         <h2>Write A Review</h2>
         {% csrf_token %}
         {{ review_form.as_p }}
-        <input type="submit" class="btn" value="Add Review">
+        <input type="submit" class="btn z-depth-4 amber darken-4 white-text" value="Add Review">
     </form>
     
 </div>

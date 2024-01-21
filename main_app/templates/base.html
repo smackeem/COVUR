@@ -27,14 +27,14 @@
         <div class="nav-wrapper">
           <ul>
             <li>
-              <a href="/" class="left brand-logo no_underline"
+              <a href="/" style="text-decoration: none !important; color: inherit !important;" class="left brand-logo no_underline"
                 >COVUR<i class="large material-icons right">store</i></a
               >
             </li>
           </ul>
           <ul class="right">
             <li>
-              <a class="d-flex no_underline" href="{% url 'cart' %}">
+              <a class="d-flex no_underline" style="text-decoration: none !important; color: inherit !important;" href="{% url 'cart' %}">
                 <i class="medium material-icons right">shopping_cart</i>
                 {% if cart.num_of_items %}<span
                   class="align-self-start"
@@ -47,20 +47,20 @@
             {% if request.user.is_authenticated %}
             {% if request.user.is_superuser %}
             <li>
-              <a class="no_underline" href="{% url 'products_create' %}">ADD PODUCTS</a>
+              <a class="no_underline" style="text-decoration: none !important; color: inherit !important;" href="{% url 'products_create' %}">ADD PODUCTS</a>
             </li>
             {% endif %}
             <li>
-              <a class="no_underline" href="{% url 'orders' %}">ORDERS</a>
+              <a class="no_underline" style="text-decoration: none !important; color: inherit !important;" href="{% url 'orders' %}">ORDERS</a>
             </li>
             <li>
-              <a class="no_underline" href="{% url 'logout' %}">LOGOUT</a>
+              <a class="no_underline" style="text-decoration: none !important; color: inherit !important;" href="{% url 'logout' %}">LOGOUT</a>
             </li>
             {% else %}
             <li>
-              <a class="no_underline" href="{% url 'signup' %}">SIGN UP</a>
+              <a class="no_underline" style="text-decoration: none !important; color: inherit !important;" href="{% url 'signup' %}">SIGN UP</a>
             </li>
-            <li><a class="no_underline" href="{% url 'login' %}">LOGIN</a></li>
+            <li><a class="no_underline" style="text-decoration: none !important; color: inherit !important;" href="{% url 'login' %}">LOGIN</a></li>
             {% endif %}
           </ul>
         </div>
