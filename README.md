@@ -2,7 +2,7 @@
 
 <br />
 <div align="center">
-  <h1><a href="https://covurstore-aef113cfb56b.herokuapp.com/">COVUR: E-Store</a></h1>
+  <h1><a href="https://covurstore-aef113cfb56b.herokuapp.com/">COVUR: E-Store (Django)</a></h1>
 </div>
 
 <!-- TABLE OF CONTENTS -->
@@ -22,7 +22,7 @@
 
 
 ## About the Project
-Welcome to the <a href="https://covurstore-aef113cfb56b.herokuapp.com/">COVUR E-Store Application</a>, a sophisticated and feature-rich platform designed to provide a seamless shopping experience for users seeking premium men's skincare products. This project leverages Django by incorporating essential features and integrations to deliver a robust E-Commerce solution.
+Welcome to the <a href="https://covurstore-aef113cfb56b.herokuapp.com/">COVUR E-Store Application</a>, a sophisticated and feature-rich platform designed to provide a seamless shopping experience for users seeking premium men's skincare products. This project leverages both Django by incorporating essential features and integrations, and <a href="https://stripe.com/docs/development/get-started">STRIPE API</a> for handling secure card payments to deliver a robust E-Commerce solution.
 
 
 ## Screenshots
