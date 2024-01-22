@@ -42,8 +42,8 @@ body {
 .bgimg{
   background-image: url('https://i.ibb.co/vJGxcMS/what-is-charcoal-3-1024x1024.jpg');
   background-size: cover;
-  background-repeat: no-repeat;
 }
+
 body.modal-open {
   overflow: hidden;
 }
