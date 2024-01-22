@@ -142,5 +142,5 @@ STRIPE_WEBHOOK_SECRET = config('STRIPE_WEBHOOK_SECRET')
 REDIRECT_URL = config('REDIRECT_URL', default='http://127.0.0.1:8000')
 REDIRECT_URL_LIVE = config('REDIRECT_URL_LIVE', default='https://covurstore-aef113cfb56b.herokuapp.com')
 
-import django_on_heroku
-django_on_heroku.settings(locals())
+# import django_on_heroku
+# django_on_heroku.settings(locals())
